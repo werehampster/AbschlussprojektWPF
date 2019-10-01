@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using System.IO;
 
 namespace AbschlussprojektWPF
 {
@@ -57,5 +59,79 @@ namespace AbschlussprojektWPF
             // soll die Möglichkeit bestehen, JAWS/ZoomText zu starten... zur Überprüfung soll zunächst nur auf JAWS und ZoomText geprüft werden, 
             // Browser /Word können nachher noch gestartet werden 
         }
+
+        private void checkCheckBox()
+        {
+
+            Process[] processlist = Process.GetProcesses();
+
+            foreach (Process theprocess in processlist)
+            {
+
+                // mit switch!
+
+                if (theprocess.ProcessName == "jfw")
+                {
+                    Logger logFile = new Logger();
+                    logFile.writeLog();
+                }
+
+
+            }
+        }
+
+
+        #region Überprüfung der Checkboxen
+        private void CbFirefox_CheckedChanged(object sender, EventArgs e)
+        {
+            firefox = true;
+
+        }
+
+        private void CbChrome_CheckedChanged(object sender, EventArgs e)
+        {
+            chrome = true;
+        }
+
+        private void CbIE_CheckedChanged(object sender, EventArgs e)
+        {
+            ie = true;
+        }
+
+        private void CbWord_CheckedChanged(object sender, EventArgs e)
+        {
+            word = true;
+        }
+
+        private void CbOutlook_CheckedChanged(object sender, EventArgs e)
+        {
+            outlook = true;
+        }
+
+        private void CbExcel_CheckedChanged(object sender, EventArgs e)
+        {
+            excel = true;
+        }
+
+        private void CbJaws_CheckedChanged(object sender, EventArgs e)
+        {
+            jaws = true;
+        }
+
+        private void CbNVDA_CheckedChanged(object sender, EventArgs e)
+        {
+            nvda = true;
+        }
+
+        private void CbZoomText_CheckedChanged(object sender, EventArgs e)
+        {
+            zoomtext = true;
+        }
+
+        private void CbSuperNova_CheckedChanged(object sender, EventArgs e)
+        {
+            supernova = true;
+        }
+        #endregion
     }
 }

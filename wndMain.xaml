@@ -10,19 +10,27 @@
         <Button x:Name="btnQuit" Content="Beenden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.396,18.362" Margin="41,361,0,0" Click="BtnQuit_Click" Height="34"/>
         <Button x:Name="btnAnalysis" Content="Auswertung" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="498,361,0,0" Height="34" Click="BtnAnalysis_Click"/>
         <Button x:Name="btnLog" Content="Start/Stop Log" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="645,361,0,0" Height="34" Click="BtnLog_Click"/>
-        <GroupBox x:Name="gbRelevantProgs" Header="Relevante Programme" HorizontalAlignment="Left" Height="199" VerticalAlignment="Top" Width="171" RenderTransformOrigin="1.594,2.09" Margin="41,42,0,0">
+        <GroupBox x:Name="gbRelevantProgs" Header="Relevante Programme" HorizontalAlignment="Left" Height="174" VerticalAlignment="Top" Width="150" RenderTransformOrigin="1.594,2.09" Margin="41,42,0,0">
             <Grid Margin="0,36,11,16">
                 <Grid>
-                    <StackPanel HorizontalAlignment="Left" Height="152" VerticalAlignment="Top" Width="162" Margin="0,-27,-14,0">
-                        <CheckBox Content="CheckBox" VerticalAlignment="Top" Margin="0,0,0,5"/>
-                        <CheckBox Content="CheckBox" Margin="0,0,0,5"/>
-                        <CheckBox Content="CheckBox" Margin="0,0,0,5"/>
-                        <CheckBox Content="CheckBox" Margin="0,0,0,5"/>
-                        <CheckBox Content="CheckBox" Margin="0,0,0,5"/>
-                        <CheckBox Content="CheckBox"/>
+                    <StackPanel x:Name="spRelevantPrograms" HorizontalAlignment="Left" Width="162" Margin="0,-27,-14,10">
+                        <CheckBox x:Name="cbFirefox" Content="Firefox" VerticalAlignment="Top" Margin="0,0,0,5"/>
+                        <CheckBox x:Name="cbChrome" Content="Chrome" Margin="0,0,0,5"/>
+                        <CheckBox x:Name="cbIE" Content="Internet Explorer" Margin="0,0,0,5"/>
+                        <CheckBox x:Name="cbWord" Content="Word" Margin="0,0,0,5"/>
+                        <CheckBox x:Name="cbOutlook" Content="Outlook" Margin="0,0,0,5"/>
+                        <CheckBox x:Name="cbExcel" Content="Excel"/>
                     </StackPanel>
                 </Grid>
             </Grid>
+        </GroupBox>
+        <GroupBox x:Name="gbAssistiveTech" Header="Assistenzt Programme" HorizontalAlignment="Left" Height="174" VerticalAlignment="Top" Width="148" Margin="208,42,0,0">
+            <StackPanel x:Name="spAssistiveTech" HorizontalAlignment="Left" Height="131" VerticalAlignment="Top" Width="138" Margin="0,10,-2,0">
+                <CheckBox x:Name="cbJaws" Content="JAWS" Margin="0,0,0,5"/>
+                <CheckBox x:Name="cbNVDA" Content="NVDA" Margin="0,0,0,5"/>
+                <CheckBox x:Name="cbZoomtext" Content="ZoomText" Margin="0,0,0,5"/>
+                <CheckBox x:Name="cbSupernova" Content="SuperNova"/>
+            </StackPanel>
         </GroupBox>
 
     </Grid>
