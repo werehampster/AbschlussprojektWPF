@@ -106,21 +106,43 @@ namespace AbschlussprojektWPF
         }
         public void writeLog()
         {
+            bool firefox = false;
+            bool chrome = false;
+            bool intex = false;
+            
             // holt alle Prozesse, die laufen
             Process[] processlist = Process.GetProcesses();
 
             // Überschrift für die Log Datei
             File.WriteAllText(@"D:\log.txt", "Active Processes: \r\n\r\n");
-
+            File.AppendAllText(@"D:\log.txt", "Aktives Fenster: " + GetTitleOfActiveWindow() + "\r\n");
             // läuft durch die Prozesse
             foreach (Process theprocess in processlist)
             {
                 //schreibt nur Browser in die Logdatei
-                if (theprocess.ProcessName == "firefox" || theprocess.ProcessName == "chrome" || theprocess.ProcessName == "iexplore")
+                if ((theprocess.ProcessName == "firefox" && firefox == false) || (theprocess.ProcessName == "chrome" && chrome == false) || (theprocess.ProcessName == "iexplore" && intex == false))
                 {
                     this.browserName = theprocess.ProcessName;
-                    File.AppendAllText(@"D:\log.txt", browserName + "\r\n");
-                    File.AppendAllText(@"D:\log.txt", GetTitleOfActiveWindow());
+                    File.AppendAllText(@"D:\log.txt", "Browser: " + browserName + "\r\n");
+                    
+
+
+                    switch (this.browserName)
+                    {
+                        case "firefox":
+                            firefox = true;
+                            break;
+                        case "chrome":
+                            chrome = true;
+                            break;
+                        case "iexplore":
+                            intex = true;
+                            break;
+                        default:
+                            // hier muss ich mir noch was ausdenken
+                            break;
+                    }
+
 
                     //schreibt noch alle Prozesse in die Datei, wenn firefox schon drin steht, soll es nicht nochmal geschrieben werden
                 }
@@ -130,6 +152,7 @@ namespace AbschlussprojektWPF
 
 
         }
+
     }
 
 

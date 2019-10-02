@@ -24,7 +24,7 @@
                 </Grid>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="gbAssistiveTech" Header="Assistenzt Programme" HorizontalAlignment="Left" Height="174" VerticalAlignment="Top" Width="148" Margin="208,42,0,0">
+        <GroupBox x:Name="gbAssistiveTech" Header="Assistenz Programme" HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="148" Margin="300,42,0,0">
             <StackPanel x:Name="spAssistiveTech" HorizontalAlignment="Left" Height="131" VerticalAlignment="Top" Width="138" Margin="0,10,-2,0">
                 <CheckBox x:Name="cbJaws" Content="JAWS" Margin="0,0,0,5"/>
                 <CheckBox x:Name="cbNVDA" Content="NVDA" Margin="0,0,0,5"/>

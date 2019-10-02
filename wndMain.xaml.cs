@@ -58,6 +58,12 @@ namespace AbschlussprojektWPF
             // wenn dieser Button gedrückt wird, soll eine Überprüfung stattfinden, ob der Logvorgang überhaupt gestartet werden soll, wenn nicht
             // soll die Möglichkeit bestehen, JAWS/ZoomText zu starten... zur Überprüfung soll zunächst nur auf JAWS und ZoomText geprüft werden, 
             // Browser /Word können nachher noch gestartet werden 
+
+
+            //////////TEST ///////////
+            Logger logFile = new Logger();
+            logFile.writeLog();
+
         }
 
         private void checkCheckBox()
