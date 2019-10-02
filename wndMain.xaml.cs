@@ -62,7 +62,7 @@ namespace AbschlussprojektWPF
 
             //////////TEST ///////////
             Logger logFile = new Logger();
-            logFile.writeLog();
+            logFile.WriteInitialLog();
 
         }
 
@@ -79,7 +79,7 @@ namespace AbschlussprojektWPF
                 if (theprocess.ProcessName == "jfw")
                 {
                     Logger logFile = new Logger();
-                    logFile.writeLog();
+                    logFile.WriteInitialLog();
                 }
 
 

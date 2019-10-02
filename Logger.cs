@@ -32,7 +32,6 @@ namespace AbschlussprojektWPF
         static extern int GetWindowTextLength(IntPtr hWnd);
         #endregion
 
-        public string browserName;
         public bool isJaws = false;
         public bool isZoomText = false;
         public bool isNVDA = false;
@@ -104,30 +103,41 @@ namespace AbschlussprojektWPF
 
             return WindowTitle;
         }
-        public void writeLog()
+        public void WriteInitialLog()
         {
-            bool firefox = false;
-            bool chrome = false;
-            bool intex = false;
-            
-            // holt alle Prozesse, die laufen
-            Process[] processlist = Process.GetProcesses();
+
 
             // Überschrift für die Log Datei
             File.WriteAllText(@"D:\log.txt", "Active Processes: \r\n\r\n");
+            // Aktives Fenster MUSS NOCH WOANDERS HIN!
             File.AppendAllText(@"D:\log.txt", "Aktives Fenster: " + GetTitleOfActiveWindow() + "\r\n");
+            // Browser
+            File.AppendAllText(@"D:\log.txt", "Browser: " + GetBrowser() + "\r\n");
+
+
+                
+            //schreibt noch alle Prozesse in die Datei, wenn firefox schon drin steht, soll es nicht nochmal geschrieben werden
+        }
+
+
+        public string GetBrowser()
+        {
+            string BrowserName = string.Empty;
+            bool firefox = false;
+            bool chrome = false;
+            bool intex = false;
+
+            // holt alle Prozesse, die laufen
+            Process[] processlist = Process.GetProcesses();
             // läuft durch die Prozesse
             foreach (Process theprocess in processlist)
             {
                 //schreibt nur Browser in die Logdatei
                 if ((theprocess.ProcessName == "firefox" && firefox == false) || (theprocess.ProcessName == "chrome" && chrome == false) || (theprocess.ProcessName == "iexplore" && intex == false))
                 {
-                    this.browserName = theprocess.ProcessName;
-                    File.AppendAllText(@"D:\log.txt", "Browser: " + browserName + "\r\n");
+                    BrowserName = theprocess.ProcessName;
                     
-
-
-                    switch (this.browserName)
+                    switch (BrowserName)
                     {
                         case "firefox":
                             firefox = true;
@@ -142,17 +152,18 @@ namespace AbschlussprojektWPF
                             // hier muss ich mir noch was ausdenken
                             break;
                     }
-
-
-                    //schreibt noch alle Prozesse in die Datei, wenn firefox schon drin steht, soll es nicht nochmal geschrieben werden
                 }
-
-
             }
 
+            return BrowserName;
 
         }
 
+        public string GetAssistTech()
+        {
+            string AssistTech = string.Empty;
+            return AssistTech;
+        }
     }
 
 
