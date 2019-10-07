@@ -32,9 +32,9 @@ namespace AbschlussprojektWPF
         static extern int GetWindowTextLength(IntPtr hWnd);
         #endregion
 
-        public bool isJaws = false;
-        public bool isZoomText = false;
-        public bool isNVDA = false;
+        string word = string.Empty;
+        string excel = string.Empty;
+        string outlook = string.Empty;
 
         public Logger()
         {
@@ -113,9 +113,14 @@ namespace AbschlussprojektWPF
             File.AppendAllText(@"D:\log.txt", "Aktives Fenster: " + GetTitleOfActiveWindow() + "\r\n");
             // Browser
             File.AppendAllText(@"D:\log.txt", "Browser: " + GetBrowser() + "\r\n");
+            // Assistive Technology
+            File.AppendAllText(@"D:\log.txt", "Assistive Tech: " + GetAssistTech() + "\r\n");
+            // Office Programme
+            GetOffice();
+            File.AppendAllText(@"D:\log.txt", "Office Programme: " + word +" " + outlook + " " + excel + "\r\n");
 
 
-                
+
             //schreibt noch alle Prozesse in die Datei, wenn firefox schon drin steht, soll es nicht nochmal geschrieben werden
         }
 
@@ -162,7 +167,67 @@ namespace AbschlussprojektWPF
         public string GetAssistTech()
         {
             string AssistTech = string.Empty;
+            bool jaws = false;
+            bool nvda = false;
+            bool zoomtext = false;
+
+
+            // holt alle Prozesse, die laufen
+            Process[] processlist = Process.GetProcesses();
+            // läuft durch die Prozesse
+            foreach (Process theprocess in processlist)
+            {
+                //schreibt nur Browser in die Logdatei
+                if ((theprocess.ProcessName == "jfw" && jaws == false) || (theprocess.ProcessName == "nvda" && nvda == false) || (theprocess.ProcessName == "Zt" && zoomtext == false))
+                {
+                    AssistTech = theprocess.ProcessName;
+
+                    switch (AssistTech)
+                    {
+                        case "jfw":
+                            jaws = true;
+                            break;
+                        case "nvda":
+                            nvda = true;
+                            break;
+                        case "Zt":
+                            zoomtext = true;
+                            break;
+                        default:
+                            // hier muss ich mir noch was ausdenken
+                            break;
+                    }
+                }
+            }
             return AssistTech;
+        }
+
+        public void GetOffice()
+        {
+
+
+
+            // holt alle Prozesse, die laufen
+            Process[] processlist = Process.GetProcesses();
+            // läuft durch die Prozesse
+            foreach (Process theprocess in processlist)
+            {
+                //schreibt nur Browser in die Logdatei
+                if (theprocess.ProcessName == "WINWORD")
+                {
+                     word = "word";
+                }
+                if (theprocess.ProcessName == "EXCEL")
+                {
+                    excel = "excel";
+                }
+                if (theprocess.ProcessName == "OUTLOOK") 
+                {
+                    outlook = "outlook";
+                }
+  
+            }
+            
         }
     }
 
