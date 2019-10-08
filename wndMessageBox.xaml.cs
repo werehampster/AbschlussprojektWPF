@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace AbschlussprojektWPF
 {
@@ -27,6 +28,24 @@ namespace AbschlussprojektWPF
         private void BtnQuit_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void BtnStart_Click(object sender, RoutedEventArgs e)
+        {
+            if(cbJaws.IsChecked == true)
+            {
+                Process.Start(@"C:\Program Files\Freedom Scientific\JAWS\2019\jfw.exe");
+            }
+
+            if(cbZoomText.IsChecked == true)
+            {
+                Process.Start(@"C:\Program Files (x86)\Freedom Scientific\ZoomText\2019\Zt.exe");
+            }
+
+            if(cbNVDA.IsChecked == true)
+            {
+                Process.Start(@"C:\Program Files\NVDA\mynvda.exe");
+            }
         }
     }
 }

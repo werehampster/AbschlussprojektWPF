@@ -19,7 +19,7 @@ namespace AbschlussprojektWPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
-    /// All references to SuperNova have been commented out because only a 30 day trial versionwas available
+    /// All references to SuperNova have been commented out because only a 30 day trial version was available
     /// </summary>
     public partial class wndMain : Window
     {
@@ -76,12 +76,27 @@ namespace AbschlussprojektWPF
             jaws = false;
             nvda = false;
             zoomtext = false;
+            // supernova = false;
+
+            procFirefox = false;
+            procChrome = false;
+            procIE = false;
+            procWord = false;
+            procExcel = false;
+            procOutlook = false;
+            procJaws = false;
+            procNvda = false;
+            procZoomtext = false;
+            // procSupernova = false;
 
             // wenn dieser Button gedrückt wird, soll eine Überprüfung stattfinden, ob der Logvorgang überhaupt gestartet werden soll, wenn nicht
             // soll die Möglichkeit bestehen, JAWS/ZoomText zu starten... zur Überprüfung soll zunächst nur auf JAWS und ZoomText geprüft werden, 
             // Browser /Word können nachher noch gestartet werden 
             checkCheckBox();
-            if (jaws == false && nvda == false && zoomtext == false)
+            checkProcesses();
+
+            // überprüft, ob Assistenzprogramme laufen, wenn nicht, wird ein Fenster geöffnet, in dem man ein Assistenzprogramm starten kann.
+            if (procJaws == false && procNvda == false && procZoomtext == false)
             {
                 wndMessageBox wndMessageBox = new wndMessageBox();
                 wndMessageBox.Show();
@@ -147,7 +162,59 @@ namespace AbschlussprojektWPF
 
         }
 
+        private void checkProcesses()
+        {
+            string ProcessName = string.Empty;
+            Process[] processlist = Process.GetProcesses();
+            // läuft durch die Prozesse
+            foreach (Process theprocess in processlist)
+            {
+                ProcessName = theprocess.ProcessName;
 
+                if (ProcessName == "firefox")
+                {
+                    procFirefox = true;
+                }
+                if (ProcessName == "chrome")
+                {
+                    procChrome = true;
+                }
+                if (ProcessName == "iexplore")
+                {
+                    procIE = true;
+                }
+                if (ProcessName == "WINWORD")
+                {
+                    procWord = true;
+                }
+                if (ProcessName == "EXCEL")
+                {
+                    procExcel = true;
+                }
+                if (ProcessName == "OUTLOOK")
+                {
+                    procOutlook = true;
+                }
+                if (ProcessName == "nvda")
+                {
+                    procNvda = true;
+                }
+                if (ProcessName == "jfw")
+                {
+                    procJaws = true;
+                }
+                if (ProcessName == "Zt")
+                {
+                    procZoomtext = true;
+                }
+                //if (ProcessName == "supernova")
+                //{
+                //    procSupernova = true;
+                //}
+
+            }
+
+        }
 
     }
 }
