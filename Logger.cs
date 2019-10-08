@@ -41,9 +41,7 @@ namespace AbschlussprojektWPF
             // wenn das Programm gestartet wird, werden zum Einen die laufenden Prozesse geloggt, 
             // zum Anderen wird geloggt, welcher Browser verwendet wird.
 
-            //runningProcess = logProcess();
-            //logProcess();
-            //logBrowser();
+            WriteInitialLog();
 
         }
 
@@ -84,7 +82,7 @@ namespace AbschlussprojektWPF
         //}
 
 
-        // Methode, die den Titel des aktiven (vordergrun) Fensters zurückliefert
+        // Methode, die den Titel des aktiven (vordergrund) Fensters zurückliefert
         private static string GetTitleOfActiveWindow()
         {
             string WindowTitle = "";
@@ -106,7 +104,6 @@ namespace AbschlussprojektWPF
         public void WriteInitialLog()
         {
 
-
             // Überschrift für die Log Datei
             File.WriteAllText(@"D:\log.txt", "Active Processes: \r\n\r\n");
             // Aktives Fenster MUSS NOCH WOANDERS HIN!
@@ -118,10 +115,6 @@ namespace AbschlussprojektWPF
             // Office Programme
             GetOffice();
             File.AppendAllText(@"D:\log.txt", "Office Programme: " + word +" " + outlook + " " + excel + "\r\n");
-
-
-
-            //schreibt noch alle Prozesse in die Datei, wenn firefox schon drin steht, soll es nicht nochmal geschrieben werden
         }
 
 
@@ -205,14 +198,12 @@ namespace AbschlussprojektWPF
         public void GetOffice()
         {
 
-
-
             // holt alle Prozesse, die laufen
             Process[] processlist = Process.GetProcesses();
             // läuft durch die Prozesse
             foreach (Process theprocess in processlist)
             {
-                //schreibt nur Browser in die Logdatei
+                
                 if (theprocess.ProcessName == "WINWORD")
                 {
                      word = "word";

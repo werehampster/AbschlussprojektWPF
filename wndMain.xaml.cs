@@ -25,16 +25,16 @@ namespace AbschlussprojektWPF
         public string processName;
 
         // alle booleans initalisieren und auf false setzen
-        bool firefox = false;
-        bool chrome = false;
-        bool ie = false;
-        bool word = false;
-        bool excel = false;
-        bool outlook = false;
-        bool jaws = false;
-        bool nvda = false;
-        bool zoomtext = false;
-        bool supernova = false;
+        bool firefox;
+        bool chrome;
+        bool ie;
+        bool word;
+        bool excel;
+        bool outlook;
+        bool jaws;
+        bool nvda;
+        bool zoomtext;
+        //bool supernova = false;
 
         public wndMain()
         {
@@ -49,41 +49,50 @@ namespace AbschlussprojektWPF
         private void BtnAnalysis_Click(object sender, RoutedEventArgs e)
         {
             // initialisiere Auswertungsfenster
-            wndAnalysis frmAnalysis = new wndAnalysis();
-            frmAnalysis.Show();
+            wndAnalysis wndAnalysis = new wndAnalysis();
+            wndAnalysis.Show();
         }
 
         private void BtnLog_Click(object sender, RoutedEventArgs e)
         {
+            firefox = false;
+            chrome = false;
+            ie = false;
+            word = false;
+            excel = false;
+            outlook = false;
+            jaws = false;
+            nvda = false;
+            zoomtext = false;
+
             // wenn dieser Button gedrückt wird, soll eine Überprüfung stattfinden, ob der Logvorgang überhaupt gestartet werden soll, wenn nicht
             // soll die Möglichkeit bestehen, JAWS/ZoomText zu starten... zur Überprüfung soll zunächst nur auf JAWS und ZoomText geprüft werden, 
             // Browser /Word können nachher noch gestartet werden 
-
-
-            //////////TEST ///////////
-            Logger logFile = new Logger();
-            logFile.WriteInitialLog();
+            checkCheckBox();
+            if (jaws == false && nvda == false && zoomtext == false)
+            {
+                wndMessageBox wndMessageBox = new wndMessageBox();
+                wndMessageBox.Show();
+            }
+            else
+            {
+                Logger logFile = new Logger();
+            }
 
         }
 
         private void checkCheckBox()
         {
-
-            Process[] processlist = Process.GetProcesses();
-
-            foreach (Process theprocess in processlist)
+            if(cbFirefox.IsChecked == true)
             {
-
-                // mit switch!
-
-                if (theprocess.ProcessName == "jfw")
-                {
-                    Logger logFile = new Logger();
-                    logFile.WriteInitialLog();
-                }
-
-
+                firefox = true;
             }
+
+            if(cbJaws.IsChecked == true)
+            {
+                jaws = true;
+            }
+
         }
 
 
@@ -134,10 +143,12 @@ namespace AbschlussprojektWPF
             zoomtext = true;
         }
 
-        private void CbSuperNova_CheckedChanged(object sender, EventArgs e)
-        {
-            supernova = true;
-        }
+        //private void CbSuperNova_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    supernova = true;
+        //}
+
+
         #endregion
     }
 }

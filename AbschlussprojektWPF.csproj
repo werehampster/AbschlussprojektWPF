@@ -60,6 +60,9 @@
     <Compile Include="wndAnalysis.xaml.cs">
       <DependentUpon>wndAnalysis.xaml</DependentUpon>
     </Compile>
+    <Compile Include="wndMessageBox.xaml.cs">
+      <DependentUpon>wndMessageBox.xaml</DependentUpon>
+    </Compile>
     <Page Include="wndMain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +76,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="wndAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wndMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
