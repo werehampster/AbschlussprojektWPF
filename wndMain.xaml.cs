@@ -19,12 +19,13 @@ namespace AbschlussprojektWPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// All references to SuperNova have been commented out because only a 30 day trial versionwas available
     /// </summary>
     public partial class wndMain : Window
     {
         public string processName;
 
-        // alle booleans initalisieren und auf false setzen
+        // bools zum Überprüfen der Checkboxen
         bool firefox;
         bool chrome;
         bool ie;
@@ -36,6 +37,17 @@ namespace AbschlussprojektWPF
         bool zoomtext;
         //bool supernova = false;
 
+        // bools zum Überprüfen der Prozesse
+        bool procFirefox;
+        bool procChrome;
+        bool procIE;
+        bool procWord;
+        bool procExcel;
+        bool procOutlook;
+        bool procJaws;
+        bool procNvda;
+        bool procZoomtext;
+        // bool procSupernova;
         public wndMain()
         {
             InitializeComponent();
@@ -88,67 +100,54 @@ namespace AbschlussprojektWPF
                 firefox = true;
             }
 
-            if(cbJaws.IsChecked == true)
+            if (cbChrome.IsChecked == true)
+            {
+                chrome = true;
+            }
+
+            if (cbIE.IsChecked == true)
+            {
+                ie = true;
+            }
+
+            if (cbWord.IsChecked == true)
+            {
+                word = true;
+            }
+
+            if (cbOutlook.IsChecked == true)
+            {
+                outlook = true;
+            }
+
+            if (cbExcel.IsChecked == true)
+            {
+                excel = true;
+            }
+
+            if (cbJaws.IsChecked == true)
             {
                 jaws = true;
             }
 
+            if (cbNVDA.IsChecked == true)
+            {
+                nvda = true;
+            }
+
+            if (cbZoomtext.IsChecked == true)
+            {
+                zoomtext = true;
+            }
+
+            //if (cbSupernova.IsChecked == true)
+            //{
+            //    supernova = true;
+            //}
+
         }
 
 
-        #region Überprüfung der Checkboxen
-        private void CbFirefox_CheckedChanged(object sender, EventArgs e)
-        {
-            firefox = true;
 
-        }
-
-        private void CbChrome_CheckedChanged(object sender, EventArgs e)
-        {
-            chrome = true;
-        }
-
-        private void CbIE_CheckedChanged(object sender, EventArgs e)
-        {
-            ie = true;
-        }
-
-        private void CbWord_CheckedChanged(object sender, EventArgs e)
-        {
-            word = true;
-        }
-
-        private void CbOutlook_CheckedChanged(object sender, EventArgs e)
-        {
-            outlook = true;
-        }
-
-        private void CbExcel_CheckedChanged(object sender, EventArgs e)
-        {
-            excel = true;
-        }
-
-        private void CbJaws_CheckedChanged(object sender, EventArgs e)
-        {
-            jaws = true;
-        }
-
-        private void CbNVDA_CheckedChanged(object sender, EventArgs e)
-        {
-            nvda = true;
-        }
-
-        private void CbZoomText_CheckedChanged(object sender, EventArgs e)
-        {
-            zoomtext = true;
-        }
-
-        //private void CbSuperNova_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    supernova = true;
-        //}
-
-
-        #endregion
     }
 }
