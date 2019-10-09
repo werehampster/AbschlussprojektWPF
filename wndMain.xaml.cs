@@ -51,6 +51,12 @@ namespace AbschlussprojektWPF
         public wndMain()
         {
             InitializeComponent();
+            
+            string folder = @"C:\";
+            foreach (string FilePath in Directory.GetFiles(folder, "jfw.exe"))
+            {
+                MessageBox.Show("Funzt");
+            }
         }
 
         private void BtnQuit_Click(object sender, RoutedEventArgs e)
@@ -94,6 +100,7 @@ namespace AbschlussprojektWPF
             // Browser /Word können nachher noch gestartet werden 
             checkCheckBox();
             checkProcesses();
+            isCheckedAndRunning();
 
             // überprüft, ob Assistenzprogramme laufen, wenn nicht, wird ein Fenster geöffnet, in dem man ein Assistenzprogramm starten kann.
             if (procJaws == false && procNvda == false && procZoomtext == false)
@@ -213,6 +220,103 @@ namespace AbschlussprojektWPF
                 //}
 
             }
+
+        }
+
+        private void isCheckedAndRunning()
+        {
+            if (firefox == true && procFirefox == false)
+            {
+                // Zeigt eine MessageBox wenn Firefox angehakt ist, aber nicht läuft. Ermöglicht es Firefox zu starten
+                MessageBoxResult result = MessageBox.Show("Firefox läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Process.Start(@"C:\Program Files\Mozilla Firefox\firefox.exe");
+                }
+            }
+
+            if (chrome == true && procChrome == false)
+            {
+                // Zeigt eine MessageBox wenn Chrome angehakt ist, aber nicht läuft. Ermöglicht es Chrome zu starten
+                MessageBoxResult result = MessageBox.Show("Chrome läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Process.Start(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe");
+                }
+            }
+
+            if (ie == true && procIE == false)
+            {
+                // Zeigt eine MessageBox wenn Internet Explorer angehakt ist, aber nicht läuft. Ermöglicht es Internet Explorer zu starten
+                MessageBoxResult result = MessageBox.Show("Internet Explorer läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Process.Start(@"C:\Program Files\Internet Explorer\iexplore.exe");
+                }
+            }
+
+            if (word == true && procWord == false)
+            {
+                // Zeigt eine MessageBox wenn Word angehakt ist, aber nicht läuft. Ermöglicht es Word zu starten
+                MessageBoxResult result = MessageBox.Show("Word läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Process.Start(@"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE");
+                }
+            }
+
+            if (outlook == true && procOutlook == false)
+            {
+                // Zeigt eine MessageBox wenn Outlook angehakt ist, aber nicht läuft. Ermöglicht es Outlook zu starten
+                MessageBoxResult result = MessageBox.Show("Outlook läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Process.Start(@"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE");
+                }
+            }
+
+            if (excel == true && procExcel == false)
+            {
+                // Zeigt eine MessageBox wenn Excel angehakt ist, aber nicht läuft. Ermöglicht es Excel zu starten
+                MessageBoxResult result = MessageBox.Show("Excel läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Process.Start(@"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE");
+                }
+            }
+
+            if (jaws == true && procJaws == false)
+            {
+                // Zeigt eine MessageBox wenn JAWS angehakt ist, aber nicht läuft. Ermöglicht es JAWS zu starten
+                MessageBoxResult result = MessageBox.Show("JAWS läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Process.Start(@"C:\Program Files\Freedom Scientific\JAWS\2019\jfw.exe");
+                }
+            }
+
+            if (nvda == true && procNvda == false)
+            {
+                // Zeigt eine MessageBox wenn NVDA angehakt ist, aber nicht läuft. Ermöglicht es NVDA zu starten
+                MessageBoxResult result = MessageBox.Show("NVDA läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Process.Start(@"C:\Program Files\NVDA\mynvda.exe");
+                }
+            }
+
+            if (zoomtext == true && procZoomtext == false)
+            {
+                // Zeigt eine MessageBox wenn Zoomtext angehakt ist, aber nicht läuft. Ermöglicht es Zoomtext zu starten
+                MessageBoxResult result = MessageBox.Show("ZoomText läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Process.Start(@"C:\Program Files (x86)\Freedom Scientific\ZoomText\2019\Zt.exe");
+                }
+            }
+
+
+
 
         }
 

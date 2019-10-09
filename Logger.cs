@@ -38,8 +38,8 @@ namespace AbschlussprojektWPF
 
         public Logger()
         {
-            // wenn das Programm gestartet wird, werden zum Einen die laufenden Prozesse geloggt, 
-            // zum Anderen wird geloggt, welcher Browser verwendet wird.
+            // wenn das Programm gestartet wird, werden zum Einen die laufenden Assistenzprogramme geloggt, 
+            // zum Anderen wird geloggt, welcher Browser verwendet wird und welche Office Programme laufen
 
             WriteInitialLog();
 
