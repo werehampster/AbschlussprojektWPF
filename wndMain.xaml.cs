@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using System.IO;
 
+
 namespace AbschlussprojektWPF
 {
     /// <summary>
@@ -24,6 +25,7 @@ namespace AbschlussprojektWPF
     public partial class wndMain : Window
     {
         public string processName;
+        Logger logFile = new Logger();
 
         // bools zum Überprüfen der Checkboxen
         bool firefox;
@@ -52,11 +54,7 @@ namespace AbschlussprojektWPF
         {
             InitializeComponent();
             
-            string folder = @"C:\";
-            foreach (string FilePath in Directory.GetFiles(folder, "jfw.exe"))
-            {
-                MessageBox.Show("Funzt");
-            }
+
         }
 
         private void BtnQuit_Click(object sender, RoutedEventArgs e)
@@ -103,15 +101,16 @@ namespace AbschlussprojektWPF
             isCheckedAndRunning();
 
             // überprüft, ob Assistenzprogramme laufen, wenn nicht, wird ein Fenster geöffnet, in dem man ein Assistenzprogramm starten kann.
-            if (procJaws == false && procNvda == false && procZoomtext == false)
+            if (procJaws == false && procNvda == false && procZoomtext == false && jaws == false && nvda == false && zoomtext == false)
             {
                 wndMessageBox wndMessageBox = new wndMessageBox();
                 wndMessageBox.Show();
             }
             else
             {
-                Logger logFile = new Logger();
+                //Logger logFile = new Logger();
             }
+            Logger logFile = new Logger();
 
         }
 
@@ -166,7 +165,6 @@ namespace AbschlussprojektWPF
             //{
             //    supernova = true;
             //}
-
         }
 
         private void checkProcesses()
@@ -218,9 +216,7 @@ namespace AbschlussprojektWPF
                 //{
                 //    procSupernova = true;
                 //}
-
             }
-
         }
 
         private void isCheckedAndRunning()
@@ -233,6 +229,10 @@ namespace AbschlussprojektWPF
                 {
                     Process.Start(@"C:\Program Files\Mozilla Firefox\firefox.exe");
                 }
+                else
+                {
+                    cbFirefox.IsChecked = false;
+                }
             }
 
             if (chrome == true && procChrome == false)
@@ -242,6 +242,10 @@ namespace AbschlussprojektWPF
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe");
+                }
+                else
+                {
+                    cbChrome.IsChecked = false;
                 }
             }
 
@@ -253,6 +257,10 @@ namespace AbschlussprojektWPF
                 {
                     Process.Start(@"C:\Program Files\Internet Explorer\iexplore.exe");
                 }
+                else
+                {
+                    cbIE.IsChecked = false;
+                }
             }
 
             if (word == true && procWord == false)
@@ -262,6 +270,10 @@ namespace AbschlussprojektWPF
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE");
+                }
+                else
+                {
+                    cbWord.IsChecked = false;
                 }
             }
 
@@ -273,6 +285,10 @@ namespace AbschlussprojektWPF
                 {
                     Process.Start(@"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE");
                 }
+                else
+                {
+                    cbOutlook.IsChecked = false;
+                }
             }
 
             if (excel == true && procExcel == false)
@@ -282,6 +298,10 @@ namespace AbschlussprojektWPF
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE");
+                }
+                else
+                {
+                    cbExcel.IsChecked = false;
                 }
             }
 
@@ -293,6 +313,10 @@ namespace AbschlussprojektWPF
                 {
                     Process.Start(@"C:\Program Files\Freedom Scientific\JAWS\2019\jfw.exe");
                 }
+                else
+                {
+                    cbJaws.IsChecked = false;
+                }
             }
 
             if (nvda == true && procNvda == false)
@@ -302,6 +326,10 @@ namespace AbschlussprojektWPF
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files\NVDA\mynvda.exe");
+                }
+                else
+                {
+                    cbNVDA.IsChecked = false;
                 }
             }
 
@@ -313,12 +341,35 @@ namespace AbschlussprojektWPF
                 {
                     Process.Start(@"C:\Program Files (x86)\Freedom Scientific\ZoomText\2019\Zt.exe");
                 }
+                else
+                {
+                    cbZoomtext.IsChecked = false;
+                }
             }
 
-
-
-
+            //if (supernova == true && procSupernova == false)
+            //{
+            //    // Zeigt eine MessageBox wenn SuperNova angehakt ist, aber nicht läuft. Ermöglicht es SuperNova zu starten
+            //    MessageBoxResult result = MessageBox.Show("SuperNova läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //    if (result == MessageBoxResult.Yes)
+            //    {
+            //        Process.Start(@"");
+            //    }
+            //    else
+            //    {
+            //        cbSupernova.IsChecked = false;
+            //    }
+            //}
         }
 
+ 
+
+        private void keyDown_logKeys(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Tab)
+            {
+                File.AppendAllText(@"D:\KeyLog.txt", e.Key.ToString() + " " + logFile.GetTitleOfActiveWindow() + " \r\n\r\n"); ;
+            }
+        }
     }
 }

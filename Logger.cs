@@ -10,6 +10,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Web;
 using System.Runtime.InteropServices;
+using System.Windows.Input;
+using System.Windows;
 
 namespace AbschlussprojektWPF
 {
@@ -45,45 +47,8 @@ namespace AbschlussprojektWPF
 
         }
 
-
-        //public void logProcess()
-        //{
-
-        //}
-
-        //laufen alle relevanten Prozesse?
-        //public bool isRelevant()
-        //{
-        //    Process[] processlist = Process.GetProcesses();
-        //    bool isRelevant = false;
-
-
-        //    foreach (Process theprocess in processlist)
-        //    {
-
-        //        if (theprocess.ProcessName == "firefox" || theprocess.ProcessName == "chrome" || theprocess.ProcessName =="ie"|| theprocess.ProcessName == "edge")
-        //        {
-        //            this.browserName = theprocess.ProcessName;
-
-        //        }
-
-
-        //    }
-
-        //    return false;
-        //}
-
-
-        //public void logBrowser()
-        //{
-        //    Browser browserDetails = new Browser();
-
-        //   //File.WriteAllText(@"D:\test.txt", Browser.GetBrowserDetails());
-        //}
-
-
         // Methode, die den Titel des aktiven (vordergrund) Fensters zurückliefert
-        private static string GetTitleOfActiveWindow()
+        public string GetTitleOfActiveWindow()
         {
             string WindowTitle = "";
 
@@ -101,7 +66,7 @@ namespace AbschlussprojektWPF
 
             return WindowTitle;
         }
-        public void WriteInitialLog()
+        private void WriteInitialLog()
         {
 
             // Überschrift für die Log Datei
@@ -118,7 +83,7 @@ namespace AbschlussprojektWPF
         }
 
 
-        public string GetBrowser()
+        private string GetBrowser()
         {
             string BrowserName = string.Empty;
             bool firefox = false;
@@ -154,10 +119,9 @@ namespace AbschlussprojektWPF
             }
 
             return BrowserName;
-
         }
 
-        public string GetAssistTech()
+        private string GetAssistTech()
         {
             string AssistTech = string.Empty;
             bool jaws = false;
@@ -195,7 +159,7 @@ namespace AbschlussprojektWPF
             return AssistTech;
         }
 
-        public void GetOffice()
+        private void GetOffice()
         {
 
             // holt alle Prozesse, die laufen
@@ -216,11 +180,24 @@ namespace AbschlussprojektWPF
                 {
                     outlook = "outlook";
                 }
-  
             }
-            
         }
+
+        /////////////////////////////// VERSUCHE EVENT AUSZULAGERN! ////////////////////////////////
+        //public event EventHandler keyDown;
+
+        //public void OnKeyDown()
+        //{
+        //    EventHandler handler = keyDown;
+        //    if (null != handler) handler(this, EventArgs.Empty);
+        //}
+        //public void logKeys(object sender, KeyEventArgs e)
+        //{
+            
+        //    if (e.Key == Key.A)
+        //    {
+        //        MessageBox.Show("funzt");
+        //    }
+        //}
     }
-
-
 }
