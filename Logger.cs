@@ -83,7 +83,7 @@ namespace AbschlussprojektWPF
 
 
         // Methode, die den Titel des aktiven (vordergrund) Fensters zurückliefert
-        private static string GetTitleOfActiveWindow()
+        public string GetTitleOfActiveWindow()
         {
             string WindowTitle = "";
 

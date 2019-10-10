@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AbschlussprojektWPF"
         mc:Ignorable="d"
-        Title="EasyTask - Log" Height="450" Width="800">
+        Title="EasyTask - Log" Height="450" Width="800" KeyDown="keyDown_logKeys">
     <Grid>
         <Button x:Name="btnQuit" Content="Beenden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.396,18.362" Margin="41,361,0,0" Click="BtnQuit_Click" Height="34"/>
         <Button x:Name="btnAnalysis" Content="Auswertung" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="498,361,0,0" Height="34" Click="BtnAnalysis_Click"/>
