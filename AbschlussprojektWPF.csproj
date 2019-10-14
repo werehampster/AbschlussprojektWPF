@@ -112,5 +112,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="KeystrokeAPI\Keystroke.API\Keystroke.API.csproj">
+      <Project>{F6FEC17E-E22D-4149-A8A8-9F64C3C905D3}</Project>
+      <Name>Keystroke.API</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
