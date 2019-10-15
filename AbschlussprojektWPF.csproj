@@ -62,8 +62,11 @@
     <Compile Include="wndAnalysis.xaml.cs">
       <DependentUpon>wndAnalysis.xaml</DependentUpon>
     </Compile>
-    <Compile Include="wndMessageBox.xaml.cs">
-      <DependentUpon>wndMessageBox.xaml</DependentUpon>
+    <Compile Include="wndMessageBoxAsstTech.xaml.cs">
+      <DependentUpon>wndMessageBoxAsstTech.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wndMessageBoxStartLog.xaml.cs">
+      <DependentUpon>wndMessageBoxStartLog.xaml</DependentUpon>
     </Compile>
     <Page Include="wndMain.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -81,7 +84,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="wndMessageBox.xaml">
+    <Page Include="wndMessageBoxAsstTech.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wndMessageBoxStartLog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

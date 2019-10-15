@@ -18,9 +18,9 @@ namespace AbschlussprojektWPF
     /// <summary>
     /// Interaction logic for wndMessageBox.xaml
     /// </summary>
-    public partial class wndMessageBox : Window
+    public partial class wndMessageBoxAsstTech : Window
     {
-        public wndMessageBox()
+        public wndMessageBoxAsstTech()
         {
             InitializeComponent();
         }

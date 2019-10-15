@@ -105,7 +105,7 @@ namespace AbschlussprojektWPF
             // überprüft, ob Assistenzprogramme laufen, wenn nicht, wird ein Fenster geöffnet, in dem man ein Assistenzprogramm starten kann.
             if (procJaws == false && procNvda == false && procZoomtext == false && jaws == false && nvda == false && zoomtext == false)
             {
-                wndMessageBox wndMessageBox = new wndMessageBox();
+                wndMessageBoxAsstTech wndMessageBox = new wndMessageBoxAsstTech();
                 wndMessageBox.Show();
             }
             else
@@ -114,8 +114,12 @@ namespace AbschlussprojektWPF
             }
             using (var api = new KeystrokeAPI())
             {
+                KeystrokeAPI ki = new KeystrokeAPI();
                 api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeyLog.txt", character + " " + logFile.GetTitleOfActiveWindow() + "\r\n\r\n"); ; });
             }
+            wndMessageBoxStartLog wndMessageBoxStartedLog = new wndMessageBoxStartLog();
+            wndMessageBoxStartedLog.Show();
+            
         }
 
         private void checkCheckBox()
