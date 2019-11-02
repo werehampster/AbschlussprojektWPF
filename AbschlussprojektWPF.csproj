@@ -56,9 +56,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Browser.cs" />
-    <Compile Include="Hotkeys.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="clsGlobal.cs" />
+    <Compile Include="clsLogger.cs" />
     <Compile Include="wndAnalysis.xaml.cs">
       <DependentUpon>wndAnalysis.xaml</DependentUpon>
     </Compile>

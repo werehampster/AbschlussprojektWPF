@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace AbschlussprojektWPF
 {
-    class Logger
+    class clsLogger
     {
         // brauche ich, damit ich abfragen kann, welches Fenster sich im Vordergrung befindet
         #region declaration of Windows API functions
@@ -31,6 +31,9 @@ namespace AbschlussprojektWPF
 
         // returns length of text of active window
         static extern int GetWindowTextLength(IntPtr hWnd);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
+        internal static extern IntPtr GetFocus();
         #endregion
 
 
@@ -40,7 +43,7 @@ namespace AbschlussprojektWPF
         string outlook = string.Empty;
 
 
-    public Logger()
+    public clsLogger()
         {
             // wenn das Programm gestartet wird, werden zum Einen die laufenden Assistenzprogramme geloggt, 
             // zum Anderen wird geloggt, welcher Browser verwendet wird und welche Office Programme laufen
@@ -73,8 +76,7 @@ namespace AbschlussprojektWPF
 
             // Überschrift für die Log Datei
             File.WriteAllText(@"D:\log.txt", "Active Processes: \r\n\r\n");
-            // Aktives Fenster MUSS NOCH WOANDERS HIN!
-            File.AppendAllText(@"D:\log.txt", "Aktives Fenster: " + GetTitleOfActiveWindow() + "\r\n");
+            
             // Browser
             File.AppendAllText(@"D:\log.txt", "Browser: " + GetBrowser() + "\r\n");
             // Assistive Technology
@@ -186,6 +188,17 @@ namespace AbschlussprojektWPF
   
             }
             
+        }
+
+        public Control GetFocusedControl()
+        {
+            Control focusedControl = null;
+            // To get hold of the focused control:
+            IntPtr focusedHandle = GetFocus();
+            if (focusedHandle != IntPtr.Zero)
+                // Note that if the focused Control is not a .Net control, then this will return null.
+                focusedControl = Control.FromHandle(focusedHandle);
+            return focusedControl;
         }
     }
 
