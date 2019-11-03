@@ -71,20 +71,7 @@ namespace AbschlussprojektWPF
 
             return WindowTitle;
         }
-        public void WriteInitialLog()
-        {
 
-            // Überschrift für die Log Datei
-            File.WriteAllText(@"D:\log.txt", "Active Processes: \r\n\r\n");
-            
-            // Browser
-            File.AppendAllText(@"D:\log.txt", "Browser: " + GetBrowser() + "\r\n");
-            // Assistive Technology
-            File.AppendAllText(@"D:\log.txt", "Assistive Tech: " + GetAssistTech() + "\r\n");
-            // Office Programme
-            GetOffice();
-            File.AppendAllText(@"D:\log.txt", "Office Programme: " + word +" " + outlook + " " + excel + "\r\n");
-        }
 
 
         public string GetBrowser()
@@ -199,6 +186,21 @@ namespace AbschlussprojektWPF
                 // Note that if the focused Control is not a .Net control, then this will return null.
                 focusedControl = Control.FromHandle(focusedHandle);
             return focusedControl;
+        }
+
+        public void WriteInitialLog()
+        {
+
+            // Überschrift für die Log Datei
+            File.WriteAllText(@"D:\log.txt", "Active Processes: \r\n\r\n");
+
+            // Browser
+            File.AppendAllText(@"D:\log.txt", "Browser: " + GetBrowser() + "\r\n");
+            // Assistive Technology
+            File.AppendAllText(@"D:\log.txt", "Assistive Tech: " + GetAssistTech() + "\r\n");
+            // Office Programme
+            GetOffice();
+            File.AppendAllText(@"D:\log.txt", "Office Programme: " + word + " " + outlook + " " + excel + "\r\n");
         }
     }
 

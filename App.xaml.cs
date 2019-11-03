@@ -14,9 +14,9 @@ namespace AbschlussprojektWPF
     public partial class App : Application
     {
         //overrides default startup behaviour
-        //private void Application_Startup(object sender, StartupEventArgs e)
-        //{
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
 
-        //}
+        }
     }
 }

