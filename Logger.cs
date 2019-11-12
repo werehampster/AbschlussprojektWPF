@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace AbschlussprojektWPF
 {
-    class clsLogger
+    public class Logger
     {
         // brauche ich, damit ich abfragen kann, welches Fenster sich im Vordergrung befindet
         #region declaration of Windows API functions
@@ -43,7 +43,7 @@ namespace AbschlussprojektWPF
         string outlook = string.Empty;
 
 
-    public clsLogger()
+    public Logger()
         {
             // wenn das Programm gestartet wird, werden zum Einen die laufenden Assistenzprogramme geloggt, 
             // zum Anderen wird geloggt, welcher Browser verwendet wird und welche Office Programme laufen
