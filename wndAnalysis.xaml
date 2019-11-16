@@ -6,6 +6,16 @@
         xmlns:local="clr-namespace:AbschlussprojektWPF"
         mc:Ignorable="d" Height="450" Width="800" Title="EasyTask - Log Auswertung">
     <Grid>
-        
+        <DataGrid x:Name="dgAnalysis" HorizontalAlignment="Left" Height="317" Margin="68,35,0,0" VerticalAlignment="Top" Width="661" ColumnWidth="220" AutoGenerateColumns="True" ItemsSource="{Binding}" AreRowDetailsFrozen="True">
+            <!--<DataGrid.Columns>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Tastenkürzel"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Aktives Programm"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Möglicher EasyTask Job"/>
+            </DataGrid.Columns>-->
+        </DataGrid>
+        <Button x:Name="btnQuit" Content="Beenden" HorizontalAlignment="Left" Margin="68,367,0,0" VerticalAlignment="Top" Width="75" Click="btnQuit_Click" Height="26"/>
+        <Button x:Name="btnEasyTask" Content="EasyTask Starten" HorizontalAlignment="Left" Margin="459,367,0,0" VerticalAlignment="Top" Width="106" Click="btnEasyTask_Click" Height="26"/>
+        <Button x:Name="btnClose" Content="Fenster Schließen" HorizontalAlignment="Left" Margin="625,367,0,0" VerticalAlignment="Top" Width="104" Click="btnClose_Click" Height="26"/>
+
     </Grid>
 </Window>
