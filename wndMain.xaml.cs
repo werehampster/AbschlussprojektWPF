@@ -96,8 +96,8 @@ namespace AbschlussprojektWPF
             // wenn dieser Button gedrückt wird, soll eine Überprüfung stattfinden, ob der Logvorgang überhaupt gestartet werden soll, wenn nicht
             // soll die Möglichkeit bestehen, JAWS/ZoomText zu starten... zur Überprüfung soll zunächst nur auf JAWS und ZoomText geprüft werden, 
             // Browser /Word können nachher noch gestartet werden 
-            checkCheckBox();
-            checkProcesses();
+            CheckCheckBox();
+            CheckProcesses();
             isCheckedAndRunning();
 
             // überprüft, ob Assistenzprogramme laufen, wenn nicht, wird ein Fenster geöffnet, in dem man ein Assistenzprogramm starten kann.
@@ -117,60 +117,60 @@ namespace AbschlussprojektWPF
             
         }
 
-        private void checkCheckBox()
+        private void CheckCheckBox()
         {
             if (cbFirefox.IsChecked == true)
             {
                 firefox = true;
-                clsGlobal.programsChecked = true;
+                
             }
 
             if (cbChrome.IsChecked == true)
             {
                 chrome = true;
-                clsGlobal.programsChecked = true;
+                
             }
 
             if (cbIE.IsChecked == true)
             {
                 ie = true;
-                clsGlobal.programsChecked = true;
+                
             }
 
             if (cbWord.IsChecked == true)
             {
                 word = true;
-                clsGlobal.programsChecked = true;
+                
             }
 
             if (cbOutlook.IsChecked == true)
             {
                 outlook = true;
-                clsGlobal.programsChecked = true;
+                
             }
 
             if (cbExcel.IsChecked == true)
             {
                 excel = true;
-                clsGlobal.programsChecked = true;
+                
             }
 
             if (cbJaws.IsChecked == true)
             {
                 jaws = true;
-                clsGlobal.programsChecked = true;
+                
             }
 
             if (cbNVDA.IsChecked == true)
             {
                 nvda = true;
-                clsGlobal.programsChecked = true;
+                
             }
 
             if (cbZoomtext.IsChecked == true)
             {
                 zoomtext = true;
-                clsGlobal.programsChecked = true;
+                
             }
 
             //if (cbSupernova.IsChecked == true)
@@ -180,7 +180,7 @@ namespace AbschlussprojektWPF
             //}
         }
 
-        private void checkProcesses()
+        private void CheckProcesses()
         {
             string ProcessName = string.Empty;
             Process[] processlist = Process.GetProcesses();

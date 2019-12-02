@@ -16,11 +16,11 @@ namespace AbschlussprojektWPF
 {
     public class Logger
     {
-        // brauche ich, damit ich abfragen kann, welches Fenster sich im Vordergrung befindet
+        // brauche ich, damit ich abfragen kann, welches Fenster sich im Vordergrund befindet
         #region declaration of Windows API functions
         [DllImport("user32.dll")]
 
-        //returns some sort of int
+        
         private static extern IntPtr GetForegroundWindow();
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 
@@ -203,6 +203,4 @@ namespace AbschlussprojektWPF
             File.AppendAllText(@"D:\log.txt", "Office Programme: " + word + " " + outlook + " " + excel + "\r\n");
         }
     }
-
-
 }

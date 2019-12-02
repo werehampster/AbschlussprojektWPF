@@ -61,10 +61,7 @@ namespace AbschlussprojektWPF
                 //dataGridView.Rows[i].SetValues(logFile[i]);   
                 //dataGridView.Rows[i] = logFile[i];
             }
-            
-            
-            
-
+  
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
