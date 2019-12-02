@@ -113,7 +113,7 @@ namespace AbschlussprojektWPF
                 App.IsLoggingStarted = true;
 
             }
-
+            App.IsLoggingStarted = true;
             
         }
 

