@@ -4,18 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AbschlussprojektWPF"
-        mc:Ignorable="d" Height="450" Width="800" Title="EasyTask - Log Auswertung">
-    <Grid>
-        <DataGrid x:Name="dgAnalysis" HorizontalAlignment="Left" Height="317" Margin="68,35,0,0" VerticalAlignment="Top" Width="661" ColumnWidth="220" AutoGenerateColumns="True" ItemsSource="{Binding}" AreRowDetailsFrozen="True">
-            <!--<DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Tastenkürzel"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Aktives Programm"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Möglicher EasyTask Job"/>
-            </DataGrid.Columns>-->
+        mc:Ignorable="d" Height="450" Width="378.388" Title="EasyTask - Log Auswertung">
+    <Grid Margin="0,0,3.6,0">
+        <DataGrid x:Name="dgAnalysis" AutoGenerateColumns="False" Margin="10,0,9.8,58" >
+            <!--HorizontalAlignment="Left" Height="322" Margin="68,26,0,0" VerticalAlignment="Top" Width="661" ColumnWidth="220" AutoGenerateColumns="True" ItemsSource="{Binding}" AreRowDetailsFrozen="True"-->
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding}" ClipboardContentBinding="{x:Null}" Header="Tastenkürzel"/>
+                <DataGridTextColumn Binding="{Binding}" ClipboardContentBinding="{x:Null}" Header="Aktives Programm"/>
+                <DataGridTextColumn Binding="{Binding}" ClipboardContentBinding="{x:Null}" Header="Möglicher EasyTask Job"/>
+            </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnQuit" Content="Beenden" HorizontalAlignment="Left" Margin="68,367,0,0" VerticalAlignment="Top" Width="75" Click="btnQuit_Click" Height="26"/>
-        <Button x:Name="btnEasyTask" Content="EasyTask Starten" HorizontalAlignment="Left" Margin="459,367,0,0" VerticalAlignment="Top" Width="106" Click="btnEasyTask_Click" Height="26"/>
-        <Button x:Name="btnClose" Content="Fenster Schließen" HorizontalAlignment="Left" Margin="625,367,0,0" VerticalAlignment="Top" Width="104" Click="btnClose_Click" Height="26"/>
+                <Button x:Name="btnQuit" Content="Beenden" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Width="75" Click="btnQuit_Click" Height="26" RenderTransformOrigin="-0.15,0.542"/>
+        <Button x:Name="btnEasyTask" Content="EasyTask Starten" HorizontalAlignment="Left" Margin="121,375,0,0" VerticalAlignment="Top" Width="106" Click="btnEasyTask_Click" Height="26"/>
+        <Button x:Name="btnClose" Content="Fenster Schließen" HorizontalAlignment="Left" Margin="255,375,0,0" VerticalAlignment="Top" Width="104" Click="btnClose_Click" Height="26"/>
 
     </Grid>
 </Window>

@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AbschlussprojektWPF"
         mc:Ignorable="d"
-        Title="Logger gestartet" Height="215.896" Width="363.006" HorizontalAlignment="Center" VerticalAlignment="Center">
+        Title="Logger gestartet" Height="215.896" Width="379.71" HorizontalAlignment="Center" VerticalAlignment="Center">
     <Grid>
-        <TextBlock x:Name="tbMessage" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Der Logger wurde gestartet" VerticalAlignment="Center" RenderTransformOrigin="2.811,2.458" Height="60" FontSize="24"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="tbMessage" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Der Logger wurde gestartet" VerticalAlignment="Center" RenderTransformOrigin="2.811,2.458" Height="60" FontSize="24" Width="311" Margin="28,63,17.8,63.4" Grid.RowSpan="2"/>
 
     </Grid>
 </Window>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.MessageBox;
 
 namespace AbschlussprojektWPF
 {
@@ -28,40 +30,44 @@ namespace AbschlussprojektWPF
         public wndAnalysis()
         {
             InitializeComponent();
+
+
             fillDataGrid();
+
         }
 
 
         private void fillDataGrid()
         {
-            DataGridView dataGridView = new DataGridView();
-            System.Windows.Controls.DataGrid dataGrid = new System.Windows.Controls.DataGrid();
-            string[] logFile = System.IO.File.ReadAllLines(@"D:\KeysOnlyNoLogger.txt");
 
-            DataTable dataTable = new DataTable();
+            List<string> Content = new List<string>();
+
+   
+            string[] logFile = File.ReadAllLines(@"D:\KeysOnly.txt");
+            foreach (string line in logFile)
+            {
+                if (line != "")
+                {
+                    Content.Add(line);
+                }
+                else
+                    continue;
+            }
+       
+
+
+            //for(int i = 0; i< logFile.Length; i++)
+            //{
+            //    if (logFile[i] != "")
+            //    {
+            //        Content.Add(logFile[i]);
+            //    }
+            //    else
+            //        continue;
+            //}
+            dgAnalysis.ItemsSource = Content;
+
             
-            dataGridView.DataSource = dataTable;
-            dgAnalysis.DataContext = dataTable;
-            dataGrid.ItemsSource = logFile;
-
-            dataTable.Columns.Add();
-            dataTable.Columns.Add();
-            dataTable.Columns.Add();
-            int k = 0;
-            while(k < logFile.Length -1 )
-            {
-                dataTable.Rows.Add();
-                k++;
-            }
-            for (int i = 0; i < logFile.Length - 1; i++)
-            {
-
-                dataGrid.ItemsSource = logFile[i];
-                
-                //dataGridView.Rows[i].SetValues(logFile[i]);   
-                //dataGridView.Rows[i] = logFile[i];
-            }
-  
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -71,6 +77,13 @@ namespace AbschlussprojektWPF
 
         private void btnQuit_Click(object sender, RoutedEventArgs e)
         {
+            var result = MessageBox.Show("Möchten Sie die Log Dateien Löschen?", "Log - Log Dateien Löschen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                File.Delete(@"D:\KeysOnly.txt");
+                File.Delete(@"D:\log.txt");
+            }
             Environment.Exit(0);
         }
 

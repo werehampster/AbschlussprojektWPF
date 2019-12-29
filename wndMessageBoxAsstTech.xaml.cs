@@ -29,6 +29,13 @@ namespace AbschlussprojektWPF
 
         private void BtnQuit_Click(object sender, RoutedEventArgs e)
         {
+            var result = MessageBox.Show("Möchten Sie die Log Dateien Löschen?", "Log - Log Dateien Löschen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                File.Delete(@"D:\KeysOnly.txt");
+                File.Delete(@"D:\log.txt");
+            }
             Environment.Exit(0);
         }
 
@@ -51,7 +58,7 @@ namespace AbschlussprojektWPF
 
             
             App.IsLoggingStarted = true;
-
+            this.Close();
             wndMessageBoxStartLog wndMessageBoxStartLog = new wndMessageBoxStartLog();
             wndMessageBoxStartLog.Show();
         }

@@ -31,7 +31,13 @@ namespace AbschlussprojektWPF
                     if (IsLoggingStarted)
                     {
                         ////////////////////// Logik für Filter kommt hierhin //////////////////////////////
-                        File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + " " + LogFile.GetTitleOfActiveWindow() +  "\r\n\r\n");
+                        //Tab
+                        //Enter
+                        //Space
+                        // I need focused element, because I don't want to log when in textfield
+                        // I need to know which program is used, because I'll have dfferent filters (for example word vs firefox)
+
+                        File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + "\r\n\r\n");
 
                     }
                 });
@@ -40,7 +46,7 @@ namespace AbschlussprojektWPF
                 //    if (IsLoggingStarted)
                 //    {
                 //        File.AppendAllText(@"D:\KeyLog.txt",
-                //            character.KeyCode + " " + LogFile.GetTitleOfActiveWindow() + " " + LogFile.GetFocusedControl() +
+                //            character + " " + LogFile.GetTitleOfActiveWindow() + " " + LogFile.GetFocusedControl() +
                 //            "\r\n\r\n");
                 //    }
                 //});

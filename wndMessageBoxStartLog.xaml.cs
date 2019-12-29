@@ -24,6 +24,14 @@ namespace AbschlussprojektWPF
         {
             InitializeComponent();
             Timer();
+            if(App.IsLoggingStarted == false)
+            {
+                tbMessage.Text = "Der Logger wurde gestartet";
+            }
+            else
+            {
+                tbMessage.Text = "Der Logger wurde gestoppt";
+            }
         }
         private void Timer()
         {

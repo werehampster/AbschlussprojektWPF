@@ -26,6 +26,8 @@ namespace AbschlussprojektWPF
     {
         Logger logFile = new Logger();
 
+        bool LoggerRunning = false;
+
         // bools zum Überprüfen der Checkboxen
         bool firefox;
         bool chrome;
@@ -59,18 +61,36 @@ namespace AbschlussprojektWPF
 
         private void BtnQuit_Click(object sender, RoutedEventArgs e)
         {
+            
             this.Close();
+            var result = MessageBox.Show("Möchten Sie die Log Dateien löschen?", "Log - Log Dateien Löschen", MessageBoxButton.YesNo, MessageBoxImage.Question) ;
+
+            if(result == MessageBoxResult.Yes)
+            {
+                File.Delete(@"D:\KeysOnly.txt");
+                File.Delete(@"D:\log.txt");
+            }
+
         }
 
         private void BtnAnalysis_Click(object sender, RoutedEventArgs e)
         {
             // initialisiere Auswertungsfenster
-            wndAnalysis wndAnalysis = new wndAnalysis();
-            wndAnalysis.Show();
+            if (File.Exists(@"D:\KeysOnly.txt"))
+            {
+                wndAnalysis wndAnalysis = new wndAnalysis();
+                wndAnalysis.Show();
+            }
+            else
+            {
+                MessageBox.Show("Starten Sie bitte erst den Logger", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void BtnLog_Click(object sender, RoutedEventArgs e)
         {
+            
+
             firefox = false;
             chrome = false;
             ie = false;
@@ -100,21 +120,35 @@ namespace AbschlussprojektWPF
             CheckProcesses();
             isCheckedAndRunning();
 
-            // überprüft, ob Assistenzprogramme laufen, wenn nicht, wird ein Fenster geöffnet, in dem man ein Assistenzprogramm starten kann.
-            if (procJaws == false && procNvda == false && procZoomtext == false && jaws == false && nvda == false && zoomtext == false)
+            if (LoggerRunning == false)
             {
-                wndMessageBoxAsstTech wndMessageBox = new wndMessageBoxAsstTech();
-                wndMessageBox.Show();
+
+                // überprüft, ob Assistenzprogramme laufen, wenn nicht, wird ein Fenster geöffnet, in dem man ein Assistenzprogramm starten kann.
+                if (procJaws == false && procNvda == false && procZoomtext == false && jaws == false && nvda == false && zoomtext == false)
+                {
+                    wndMessageBoxAsstTech wndMessageBox = new wndMessageBoxAsstTech();
+                    wndMessageBox.Show();
+                }
+                else
+                {
+                    wndMessageBoxStartLog wndMessageBoxStartedLog = new wndMessageBoxStartLog();
+                    wndMessageBoxStartedLog.Show();
+                }
+                App.IsLoggingStarted = true;
+                LoggerRunning = true;
             }
             else
             {
                 wndMessageBoxStartLog wndMessageBoxStartedLog = new wndMessageBoxStartLog();
                 wndMessageBoxStartedLog.Show();
-                App.IsLoggingStarted = true;
-
+                App.IsLoggingStarted = false;
+                LoggerRunning = false;
             }
-            App.IsLoggingStarted = true;
-            
+
+
+
+
+
         }
 
         private void CheckCheckBox()
@@ -238,7 +272,7 @@ namespace AbschlussprojektWPF
             if (firefox == true && procFirefox == false)
             {
                 // Zeigt eine MessageBox wenn Firefox angehakt ist, aber nicht läuft. Ermöglicht es Firefox zu starten
-                MessageBoxResult result = MessageBox.Show("Firefox läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Firefox läuft nicht, soll das Programm geöffnet werden?", "Logger - Firefox öffnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files\Mozilla Firefox\firefox.exe");
@@ -252,7 +286,7 @@ namespace AbschlussprojektWPF
             if (chrome == true && procChrome == false)
             {
                 // Zeigt eine MessageBox wenn Chrome angehakt ist, aber nicht läuft. Ermöglicht es Chrome zu starten
-                MessageBoxResult result = MessageBox.Show("Chrome läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Chrome läuft nicht, soll das Programm geöffnet werden?", "Logger - Chrome öffnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe");
@@ -266,7 +300,7 @@ namespace AbschlussprojektWPF
             if (ie == true && procIE == false)
             {
                 // Zeigt eine MessageBox wenn Internet Explorer angehakt ist, aber nicht läuft. Ermöglicht es Internet Explorer zu starten
-                MessageBoxResult result = MessageBox.Show("Internet Explorer läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Internet Explorer läuft nicht, soll das Programm geöffnet werden?", "Logger - Internet Explorer öffnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files\Internet Explorer\iexplore.exe");
@@ -280,7 +314,7 @@ namespace AbschlussprojektWPF
             if (word == true && procWord == false)
             {
                 // Zeigt eine MessageBox wenn Word angehakt ist, aber nicht läuft. Ermöglicht es Word zu starten
-                MessageBoxResult result = MessageBox.Show("Word läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Word läuft nicht, soll das Programm geöffnet werden?", "Logger - Word öffnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE");
@@ -294,7 +328,7 @@ namespace AbschlussprojektWPF
             if (outlook == true && procOutlook == false)
             {
                 // Zeigt eine MessageBox wenn Outlook angehakt ist, aber nicht läuft. Ermöglicht es Outlook zu starten
-                MessageBoxResult result = MessageBox.Show("Outlook läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Outlook läuft nicht, soll das Programm geöffnet werden?", "Logger - Outlook öffnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE");
@@ -308,7 +342,7 @@ namespace AbschlussprojektWPF
             if (excel == true && procExcel == false)
             {
                 // Zeigt eine MessageBox wenn Excel angehakt ist, aber nicht läuft. Ermöglicht es Excel zu starten
-                MessageBoxResult result = MessageBox.Show("Excel läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Excel läuft nicht, soll das Programm geöffnet werden?", "Logger - Excel öffnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE");
@@ -322,7 +356,7 @@ namespace AbschlussprojektWPF
             if (jaws == true && procJaws == false)
             {
                 // Zeigt eine MessageBox wenn JAWS angehakt ist, aber nicht läuft. Ermöglicht es JAWS zu starten
-                MessageBoxResult result = MessageBox.Show("JAWS läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("JAWS läuft nicht, soll das Programm geöffnet werden?", "Logger - JAWS öffnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files\Freedom Scientific\JAWS\2019\jfw.exe");
@@ -336,7 +370,7 @@ namespace AbschlussprojektWPF
             if (nvda == true && procNvda == false)
             {
                 // Zeigt eine MessageBox wenn NVDA angehakt ist, aber nicht läuft. Ermöglicht es NVDA zu starten
-                MessageBoxResult result = MessageBox.Show("NVDA läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("NVDA läuft nicht, soll das Programm geöffnet werden?", "Logger - NVDA öffnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files\NVDA\mynvda.exe");
@@ -350,7 +384,7 @@ namespace AbschlussprojektWPF
             if (zoomtext == true && procZoomtext == false)
             {
                 // Zeigt eine MessageBox wenn Zoomtext angehakt ist, aber nicht läuft. Ermöglicht es Zoomtext zu starten
-                MessageBoxResult result = MessageBox.Show("ZoomText läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("ZoomText läuft nicht, soll das Programm geöffnet werden?", "Logger - ZoomText öffnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     Process.Start(@"C:\Program Files (x86)\Freedom Scientific\ZoomText\2019\Zt.exe");
@@ -364,7 +398,7 @@ namespace AbschlussprojektWPF
             //if (supernova == true && procSupernova == false)
             //{
             //    // Zeigt eine MessageBox wenn SuperNova angehakt ist, aber nicht läuft. Ermöglicht es SuperNova zu starten
-            //    MessageBoxResult result = MessageBox.Show("SuperNova läuft nicht, soll das Programm geöffnet werden?", "My Title", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //    MessageBoxResult result = MessageBox.Show("SuperNova läuft nicht, soll das Programm geöffnet werden?", "Logger - SuperNova öffnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
             //    if (result == MessageBoxResult.Yes)
             //    {
             //        Process.Start(@"");
