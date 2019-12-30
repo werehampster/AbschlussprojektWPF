@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -16,6 +17,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
+using DataGrid = System.Windows.Controls.DataGrid;
 using MessageBox = System.Windows.MessageBox;
 
 namespace AbschlussprojektWPF
@@ -39,38 +42,46 @@ namespace AbschlussprojektWPF
 
         private void fillDataGrid()
         {
+            DataGridTextColumn shortcut = new DataGridTextColumn();
+            shortcut.Header = "Tastenkürzel";
+            shortcut.Binding = new System.Windows.Data.Binding("shortcut");
+            shortcut.Width = 110;
+            dgAnalysis.Columns.Add(shortcut);
+            DataGridTextColumn program = new DataGridTextColumn();
+            program.Header = "Aktives Programm";
+            program.Width = 110;
+            program.Binding = new System.Windows.Data.Binding("program");
+            dgAnalysis.Columns.Add(program);
+            DataGridTextColumn easyTaskJob = new DataGridTextColumn();
+            easyTaskJob.Header = "Möglicher EasyTask Job";
+            easyTaskJob.Width = 110;
+            easyTaskJob.Binding = new System.Windows.Data.Binding("easyTaskJob");
+            dgAnalysis.Columns.Add(easyTaskJob);
 
-            List<string> Content = new List<string>();
-
-            
             string[] logFile = File.ReadAllLines(@"D:\KeysOnly.txt");
-            foreach (string line in logFile)
-            {
-                if (line != "")
-                {
+            string[] prog = File.ReadAllLines(@"D:\ActiveProgram.txt");
+            string[] etj = File.ReadAllLines(@"D:\ETJob.txt");
 
-                    Content.Add(line);
-                    
-                    
+            int i = 0;
+
+            foreach (string sc in logFile)
+            { 
+                if (sc != "")
+                {
+                    try
+                    {
+                        dgAnalysis.Items.Add(new Line() { shortcut = sc, program = prog[i] });
+                        i++;
+                    }
+                    catch
+                    {
+                        dgAnalysis.Items.Add(new Line() { shortcut = sc, program = ""});
+                        i++;
+                    }
                 }
                 else
-                    continue;
+                   continue;  
             }
-       
-
-
-            //for(int i = 0; i< logFile.Length; i++)
-            //{
-            //    if (logFile[i] != "")
-            //    {
-            //        Content.Add(logFile[i]);
-            //    }
-            //    else
-            //        continue;
-            //}
-            dgAnalysis.ItemsSource = Content;
-
-            
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
