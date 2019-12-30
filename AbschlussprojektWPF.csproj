@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Line.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="wndAnalysis.xaml.cs">
       <DependentUpon>wndAnalysis.xaml</DependentUpon>

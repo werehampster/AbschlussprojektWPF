@@ -42,13 +42,16 @@ namespace AbschlussprojektWPF
 
             List<string> Content = new List<string>();
 
-   
+            
             string[] logFile = File.ReadAllLines(@"D:\KeysOnly.txt");
             foreach (string line in logFile)
             {
                 if (line != "")
                 {
+
                     Content.Add(line);
+                    
+                    
                 }
                 else
                     continue;

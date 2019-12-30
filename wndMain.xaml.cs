@@ -55,8 +55,6 @@ namespace AbschlussprojektWPF
         {
             InitializeComponent();
 
-
-
         }
 
         private void BtnQuit_Click(object sender, RoutedEventArgs e)
@@ -144,11 +142,6 @@ namespace AbschlussprojektWPF
                 App.IsLoggingStarted = false;
                 LoggerRunning = false;
             }
-
-
-
-
-
         }
 
         private void CheckCheckBox()
