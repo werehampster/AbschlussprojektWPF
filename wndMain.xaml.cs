@@ -29,15 +29,15 @@ namespace AbschlussprojektWPF
         bool LoggerRunning = false;
 
         // bools zum Überprüfen der Checkboxen
-        bool firefox;
-        bool chrome;
-        bool ie;
-        bool word;
-        bool excel;
-        bool outlook;
-        bool jaws;
-        bool nvda;
-        bool zoomtext;
+        bool firefox = false;
+        bool chrome = false;
+        bool ie = false;
+        bool word = false;
+        bool excel = false;
+        bool outlook = false;
+        public static bool jaws = false;
+        public static bool nvda = false;
+        public static bool zoomtext = false;
         //bool supernova = false;
 
         // bools zum Überprüfen der Prozesse
@@ -87,18 +87,6 @@ namespace AbschlussprojektWPF
 
         private void BtnLog_Click(object sender, RoutedEventArgs e)
         {
-            
-
-            firefox = false;
-            chrome = false;
-            ie = false;
-            word = false;
-            excel = false;
-            outlook = false;
-            jaws = false;
-            nvda = false;
-            zoomtext = false;
-            // supernova = false;
 
             procFirefox = false;
             procChrome = false;
@@ -122,17 +110,21 @@ namespace AbschlussprojektWPF
             {
 
                 // überprüft, ob Assistenzprogramme laufen, wenn nicht, wird ein Fenster geöffnet, in dem man ein Assistenzprogramm starten kann.
-                if (procJaws == false && procNvda == false && procZoomtext == false && jaws == false && nvda == false && zoomtext == false)
+                if (jaws == false && nvda == false && zoomtext == false)
                 {
+                    App.IsLoggingStarted = false;
                     wndMessageBoxAsstTech wndMessageBox = new wndMessageBoxAsstTech();
                     wndMessageBox.Show();
+                   
                 }
                 else
                 {
                     wndMessageBoxStartLog wndMessageBoxStartedLog = new wndMessageBoxStartLog();
                     wndMessageBoxStartedLog.Show();
+                    App.IsLoggingStarted = true;
+                    
                 }
-                App.IsLoggingStarted = true;
+                
                 LoggerRunning = true;
             }
             else
@@ -142,6 +134,7 @@ namespace AbschlussprojektWPF
                 App.IsLoggingStarted = false;
                 LoggerRunning = false;
             }
+            
         }
 
         private void CheckCheckBox()

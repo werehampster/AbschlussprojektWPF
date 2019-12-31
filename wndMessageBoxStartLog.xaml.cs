@@ -27,6 +27,8 @@ namespace AbschlussprojektWPF
             if(App.IsLoggingStarted == false)
             {
                 tbMessage.Text = "Der Logger wurde gestartet";
+                App.IsLoggingStarted = true;
+                
             }
             else
             {

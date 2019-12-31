@@ -73,7 +73,6 @@ namespace AbschlussprojektWPF
         }
 
 
-
         public string GetBrowser()
         {
             string BrowserName = string.Empty;
