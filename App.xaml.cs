@@ -36,15 +36,8 @@ namespace AbschlussprojektWPF
                         //Space
                         // I need focused element, because I don't want to log when in textfield
                         // I need to know which program is used, because I'll have dfferent filters (for example word vs firefox)
-
-                        string FirstKey = "";
-                        string SecondKey = "";
                         Logger activeWindow = new Logger();
-                        if (character.KeyCode.ToString() == "Insert")
-                        {
-                            FirstKey = character.KeyCode.ToString();
-                        }
-                        File.AppendAllText(@"D:\KeysOnly.txt", FirstKey + "\r\n");
+                        File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + "\r\n");
                         File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
 
                     }
