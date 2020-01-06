@@ -17,7 +17,10 @@ namespace AbschlussprojektWPF
     public partial class App : Application
     {
         string Key = "";
-        string SecondKey = "";
+        string CurrentKey = "";
+        int Tab = 0;
+        string UsedProgram= "";
+        
         Logger activeWindow = new Logger();
         public Logger LogFile { get; set; }
 
@@ -41,20 +44,58 @@ namespace AbschlussprojektWPF
                             // I need focused element, because I don't want to log when in textfield
                             // I need to know which program is used, because I'll have dfferent filters (for example word vs firefox)
 
+                        // NVDA
 
-                        if (character.KeyCode.ToString() == "Insert")
+                        // Wenn NVDA Taste gedrückt wird, soll in einer Zeile NVDA plus zweiter gedrückter Taste stehen
+                        if (character.KeyCode.ToString() == "Insert" && CurrentKey != "Insert")
                         {
                             Key = "NVDA + ";
                             File.AppendAllText(@"D:\KeysOnly.txt", Key + " ");
-                            File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+                            CurrentKey = "Insert";
+                            
+                            Tab = 0;
                         }
-                        else
+
+                        // NVDA Taste + zweite Taste
+                        if(character.KeyCode.ToString() == "N" && Key == "NVDA + ")
+                        {
+                            File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + "\r\n");
+                            
+                            File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+                            if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
+                            {
+                                File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + "\r\n");
+                            }
+                            else
+                            {
+                                File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
+                            }
+                            UsedProgram = activeWindow.GetTitleOfActiveWindow();
+                            CurrentKey = "N";
+                            Tab = 0;
+                            Key = "";
+                            
+                        }
+
+                        if(character.KeyCode.ToString()== "Tab")
                         {
                             File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + "\r\n");
                             File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
-                        }
+                            Tab++;
+                            CurrentKey = "Tab";
 
-                        
+                            if (Tab > 3 && CurrentKey =="Tab")
+                            {
+                                File.AppendAllText(@"D:\ETJob.txt", "Tab x " + Tab + "\r\n");
+                            }
+                            else
+                            {
+                                File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
+                                
+                            }
+                            UsedProgram = activeWindow.GetTitleOfActiveWindow();
+                        }    
+
                     }
 
 

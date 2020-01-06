@@ -57,16 +57,31 @@ namespace AbschlussprojektWPF
 
         }
 
+        void wndMain_Closing(object sender, ConsoleCancelEventArgs e)
+        {
+            var result = MessageBox.Show("Möchten Sie die Log Dateien löschen?", "Log - Log Dateien Löschen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                File.Delete(@"D:\KeysOnly.txt");
+                File.Delete(@"D:\log.txt");
+                File.Delete(@"D:\ActiveProgram.txt");
+                File.Delete(@"D:\ETJob.txt");
+            }   
+        }
+
         private void BtnQuit_Click(object sender, RoutedEventArgs e)
         {
             
             this.Close();
-            var result = MessageBox.Show("Möchten Sie die Log Dateien löschen?", "Log - Log Dateien Löschen", MessageBoxButton.YesNo, MessageBoxImage.Question) ;
+            var result = MessageBox.Show("Möchten Sie die Log Dateien löschen?", "Log - Log Dateien Löschen", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            if(result == MessageBoxResult.Yes)
+            if (result == MessageBoxResult.Yes)
             {
                 File.Delete(@"D:\KeysOnly.txt");
                 File.Delete(@"D:\log.txt");
+                File.Delete(@"D:\ActiveProgram.txt");
+                File.Delete(@"D:\ETJob.txt");
             }
 
         }

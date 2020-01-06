@@ -65,12 +65,13 @@ namespace AbschlussprojektWPF
             int i = 0;
 
             foreach (string sc in logFile)
-            { 
+            {
+                
                 if (sc != "")
                 {
                     try
                     {
-                        dgAnalysis.Items.Add(new Line() { shortcut = sc, program = prog[i] });
+                        dgAnalysis.Items.Add(new Line() { shortcut = sc, program = prog[i], easyTaskJob = etj[i] });
                         i++;
                     }
                     catch
@@ -97,6 +98,8 @@ namespace AbschlussprojektWPF
             {
                 File.Delete(@"D:\KeysOnly.txt");
                 File.Delete(@"D:\log.txt");
+                File.Delete(@"D:\ActiveProgram.txt");
+                File.Delete(@"D:\ETJob.txt");
             }
             Environment.Exit(0);
         }
