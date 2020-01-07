@@ -17,10 +17,13 @@ namespace AbschlussprojektWPF
     public partial class App : Application
     {
         string KeyOne = "";
+        string KeyTwo = "";
+        string KeyThree = "";
         string CurrentKey = "";
         int Tab = 0;
         string UsedProgram= "";
         bool IsNVDA = false;
+        bool IsSecond = false;
         
         Logger activeWindow = new Logger();
         public Logger LogFile { get; set; }
@@ -37,7 +40,7 @@ namespace AbschlussprojektWPF
 
                     if (IsLoggingStarted)
                     {
-
+                    //File.AppendAllText(@"D:\Test.txt", character.KeyCode.ToString() + "\r\n" );
                         ////////////////////// Logik für Filter kommt hierhin //////////////////////////////
                         //Tab
                         //Enter
@@ -48,49 +51,66 @@ namespace AbschlussprojektWPF
                         // NVDA
 
                         // Wenn NVDA Taste gedrückt wird, soll in einer Zeile NVDA plus zweiter gedrückter Taste stehen
-                        //if ((character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0") && (CurrentKey != "Insert" || character.KeyCode.ToString() != "NumPad0"))
-                        //{
-                        //    KeyOne = "NVDA + ";
-                        //    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne + " ");
-                        //    CurrentKey = "Insert";
-                        //    IsNVDA = true;
-                        //    Tab = 0;
-                        //}
+                        if ((character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0") && (CurrentKey != "Insert" || character.KeyCode.ToString() != "NumPad0"))
+                        {
+                            KeyOne = "NVDA + ";
+                            File.AppendAllText(@"D:\KeysOnly.txt", KeyOne + " ");
+                            File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
 
-                        //// NVDA Taste + zweite Taste
-                        //if (character.KeyCode.ToString() == "N" && IsNVDA == true)
-                        //{
-                        //    File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + "\r\n");
+                            // EasyTask Job Program Job add to 3rd column when active program switches
 
-                        //    // EasyTask Job Program Job add to 3rd column when active program switches
-                        //    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
-                        //    if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
-                        //    {
-                        //        File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + "\r\n");
+                            if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
+                            {
+                                File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + "\r\n");
 
-                        //    }
-                        //    else
-                        //    {
-                        //        File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
-                        //    }
+                            }
+                            else
+                            {
+                                File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
+                            }
+                            CurrentKey = "Insert";
+                            IsNVDA = true;
+                            IsSecond = true;
+                            Tab = 0;
+                        }
 
-                        //    IsNVDA = false;
-                        //    UsedProgram = activeWindow.GetTitleOfActiveWindow();
-                        //    CurrentKey = "N";
-                        //    Tab = 0;
-                        //    KeyOne = "";
+                        // NVDA Taste + zweite Taste
+                        if ((character.KeyCode.ToString() == "Tab" || character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal") && IsNVDA == true)
+                        {
 
-                        //}
+                            if (character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal")
+                            {
+                                KeyTwo = "Num Entf";
+                                File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                CurrentKey = "Delete";
+                            }
+                            else
+                            {
+                                KeyTwo = character.KeyCode.ToString();
+                                File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                CurrentKey = KeyTwo;
+                            }
+
+
+
+                            IsSecond = true;
+                            IsNVDA = false;
+                            UsedProgram = activeWindow.GetTitleOfActiveWindow();
+
+                            Tab = 0;
+                            KeyOne = "";
+
+                        }
 
 
 
                         // EasyTask Job Tab x
-                        if (character.KeyCode.ToString() == "Tab" && IsNVDA == false)
+                        if (character.KeyCode.ToString() == "Tab" && IsSecond == false)
                         {
 
                             File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + "\r\n");
                             File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
-                            
+
 
                             if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
                             {
@@ -99,10 +119,7 @@ namespace AbschlussprojektWPF
 
                             if (Tab > 3)
                             {
-
                                 File.AppendAllText(@"D:\ETJob.txt", "Tab x " + Tab + "\r\n");
-
-
                             }
                             else
                             {
@@ -120,14 +137,16 @@ namespace AbschlussprojektWPF
 
                             }
                             UsedProgram = activeWindow.GetTitleOfActiveWindow();
-                            IsNVDA = false;
+                            //IsNVDA = false;
                             Tab++;
+                            CurrentKey = "Tab";
                         }
                     }
+                    IsSecond = false;
                 });
 
             }
             base.OnStartup(e);
         }
-    }
+    }                                                                                 
 }
