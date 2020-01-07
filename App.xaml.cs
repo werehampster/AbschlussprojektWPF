@@ -66,7 +66,7 @@ namespace AbschlussprojektWPF
                             {
                                 File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + "\r\n");
                             }
-                          else
+                            else
                             {
                                 File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
                             }
@@ -77,6 +77,7 @@ namespace AbschlussprojektWPF
                             
                         }
 
+                        // EasyTask Job Tab x
                         if(character.KeyCode.ToString()== "Tab")
                         {
                             File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + "\r\n");
@@ -86,11 +87,28 @@ namespace AbschlussprojektWPF
 
                             if (Tab > 3 && CurrentKey =="Tab")
                             {
-                                File.AppendAllText(@"D:\ETJob.txt", "Tab x " + Tab + "\r\n");
+                                if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
+                                {
+                                    File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + "/Tab x " + Tab + "\r\n");
+                                }
+                                else
+                                {
+                                    File.AppendAllText(@"D:\ETJob.txt", "Tab x " + Tab + "\r\n");
+                                }
+                                
                             }
                             else
                             {
-                                File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
+
+                                if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
+                                {
+                                    File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + " " + "\r\n");
+                                }
+                                else
+                                {
+                                    File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
+                                }
+                                
                                 
                             }
                             UsedProgram = activeWindow.GetTitleOfActiveWindow();
