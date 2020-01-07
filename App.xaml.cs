@@ -66,7 +66,7 @@ namespace AbschlussprojektWPF
                             {
                                 File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + "\r\n");
                             }
-                            else
+                          else
                             {
                                 File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
                             }
