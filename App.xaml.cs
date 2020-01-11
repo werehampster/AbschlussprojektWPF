@@ -22,7 +22,7 @@ namespace AbschlussprojektWPF
         string CurrentKey = "";
         int Tab = 0;
         string UsedProgram= "";
-        bool IsNVDA = false;
+        bool IsFirst = false;
         bool IsSecond = false;
         
         Logger activeWindow = new Logger();
@@ -40,21 +40,42 @@ namespace AbschlussprojektWPF
 
                     if (IsLoggingStarted)
                     {
-                    //File.AppendAllText(@"D:\Test.txt", character.KeyCode.ToString() + "\r\n" );
-                        ////////////////////// Logik für Filter kommt hierhin //////////////////////////////
-                        //Tab
-                        //Enter
-                        //Space
-                        // I need focused element, because I don't want to log when in textfield
-                        // I need to know which program is used, because I'll have dfferent filters (for example word vs firefox)
+
+                    // Test in case I need to know which names were assigned to the pressed keys
+                    File.AppendAllText(@"D:\Test.txt", character.KeyCode.ToString() + "\r\n" );
+
+
+                        ////////////////////// Logik für Filter//////////////////////////////
 
                         // NVDA
 
-                        // Wenn NVDA Taste gedrückt wird, soll in einer Zeile NVDA plus zweiter gedrückter Taste stehen
-                        if ((character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0") && (CurrentKey != "Insert" || character.KeyCode.ToString() != "NumPad0"))
+                        // Erste Taste
+                        if ((character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0") && (CurrentKey != "Insert" || character.KeyCode.ToString() != "NumPad0") ||
+                            (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") || character.KeyCode.ToString() == "LControlKey")
                         {
-                            KeyOne = "NVDA + ";
-                            File.AppendAllText(@"D:\KeysOnly.txt", KeyOne + " ");
+                            //NVDA Taste 
+                            if (character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0")
+                            {
+                                KeyOne = "NVDA + ";
+                                CurrentKey = "Insert";
+                                
+                            }
+                            // Alt Taste
+                            else if(character.KeyCode.ToString() == "LMenu")
+                            {
+                                KeyOne = "Alt + ";
+                                CurrentKey = "LMenu";
+                            }
+                            else if (character.KeyCode.ToString() == "LControlKey")
+                            {
+                                KeyOne = "Strg + ";
+                                CurrentKey = "LControlKey";
+                            }
+                            else
+                            {
+                                KeyOne = character.KeyCode.ToString();
+                            }
+                            File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
                             File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
 
                             // EasyTask Job Program Job add to 3rd column when active program switches
@@ -68,41 +89,43 @@ namespace AbschlussprojektWPF
                             {
                                 File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
                             }
-                            CurrentKey = "Insert";
-                            IsNVDA = true;
+                            IsFirst = true;
                             IsSecond = true;
                             Tab = 0;
                         }
 
-                        // NVDA Taste + zweite Taste
-                        if ((character.KeyCode.ToString() == "Tab" || character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal") && IsNVDA == true)
+                        // Erste Taste + zweite Taste
+                        if ((character.KeyCode.ToString() == "Tab" || character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal" || character.KeyCode.ToString() == "LMenu" || character.KeyCode.ToString() == "N") && IsFirst == true)
                         {
-
+                            // Entfernen Taste
                             if (character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal")
                             {
                                 KeyTwo = "Num Entf";
-                                File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                
                                 CurrentKey = "Delete";
+                            }
+                            // Alt Taste
+                            else if(character.KeyCode.ToString() == "LMenu")
+                            {
+                                KeyTwo = "Alt";
+                                CurrentKey = "LMenu";
                             }
                             else
                             {
                                 KeyTwo = character.KeyCode.ToString();
-                                File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
                                 CurrentKey = KeyTwo;
                             }
 
-
+                            File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
 
                             IsSecond = true;
-                            IsNVDA = false;
+                            IsFirst = false;
                             UsedProgram = activeWindow.GetTitleOfActiveWindow();
 
-                            Tab = 0;
+                            Tab = 1;
                             KeyOne = "";
 
                         }
-
-
 
                         // EasyTask Job Tab x
                         if (character.KeyCode.ToString() == "Tab" && IsSecond == false)
@@ -137,7 +160,7 @@ namespace AbschlussprojektWPF
 
                             }
                             UsedProgram = activeWindow.GetTitleOfActiveWindow();
-                            //IsNVDA = false;
+                            
                             Tab++;
                             CurrentKey = "Tab";
                         }

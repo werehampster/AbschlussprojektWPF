@@ -29,7 +29,7 @@
                 <CheckBox x:Name="cbJaws" Content="JAWS" Margin="0,0,0,5"/>
                 <CheckBox x:Name="cbNVDA" Content="NVDA" Margin="0,0,0,5"/>
                 <CheckBox x:Name="cbZoomtext" Content="ZoomText" Margin="0,0,0,5"/>
-                <CheckBox x:Name="cbSupernova" Content="SuperNova"/>
+                <!--<CheckBox x:Name="cbSupernova" Content="SuperNova"/>-->
             </StackPanel>
         </GroupBox>
 
