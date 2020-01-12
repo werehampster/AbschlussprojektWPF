@@ -96,7 +96,21 @@ namespace AbschlussprojektWPF
             }
             else
             {
-                MessageBox.Show("Starten Sie bitte erst den Logger", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (App.IsLoggingStarted == false)
+                {
+                    MessageBox.Show("Starten Sie bitte erst den Logger", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+                else
+                {
+                    File.Create(@"D:\KeysOnly.txt");
+                    File.Create(@"D:\log.txt");
+                    File.Create(@"D:\ActiveProgram.txt");
+                    File.Create(@"D:\ETJob.txt");
+                    wndAnalysis wndAnalysis = new wndAnalysis();
+                    wndAnalysis.Show();
+                }
+
             }
         }
 
