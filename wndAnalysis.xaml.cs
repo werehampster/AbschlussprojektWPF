@@ -42,6 +42,11 @@ namespace AbschlussprojektWPF
 
         private void fillDataGrid()
         {
+            string[] logFile = null;
+            string[] prog = null;
+            string[] etj = null;
+            int i = 0;
+
             DataGridTextColumn shortcut = new DataGridTextColumn();
             shortcut.Header = "Tastenkürzel";
             shortcut.Binding = new System.Windows.Data.Binding("shortcut");
@@ -58,31 +63,39 @@ namespace AbschlussprojektWPF
             easyTaskJob.Binding = new System.Windows.Data.Binding("easyTaskJob");
             dgAnalysis.Columns.Add(easyTaskJob);
 
-            string[] logFile = File.ReadAllLines(@"D:\KeysOnly.txt");
-            string[] prog = File.ReadAllLines(@"D:\ActiveProgram.txt");
-            string[] etj = File.ReadAllLines(@"D:\ETJob.txt");
-
-            int i = 0;
-
-            foreach (string sc in logFile)
+            try
             {
-                
-                if (sc != "")
+                logFile = File.ReadAllLines(@"D:\KeysOnly.txt");
+                prog = File.ReadAllLines(@"D:\ActiveProgram.txt");
+                etj = File.ReadAllLines(@"D:\ETJob.txt");
+                foreach (string sc in logFile)
                 {
-                    try
+
+                    if (sc != "")
                     {
-                        dgAnalysis.Items.Add(new Line() { shortcut = sc, program = prog[i], easyTaskJob = etj[i] });
-                        i++;
+                        try
+                        {
+                            dgAnalysis.Items.Add(new Line() { shortcut = sc, program = prog[i], easyTaskJob = etj[i] });
+                            i++;
+                        }
+                        catch
+                        {
+                            dgAnalysis.Items.Add(new Line() { shortcut = sc, program = "" });
+                            i++;
+                        }
                     }
-                    catch
-                    {
-                        dgAnalysis.Items.Add(new Line() { shortcut = sc, program = ""});
-                        i++;
-                    }
+                    else
+                        continue;
                 }
-                else
-                   continue;  
+                
             }
+            catch
+            {
+                MessageBox.Show("Die Logdateien sind leer", "Log - Fehler leere Logdateien", MessageBoxButton.OK, MessageBoxImage.Error );
+            }
+            
+
+
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
