@@ -42,7 +42,7 @@ namespace AbschlussprojektWPF
                     {
 
                         // Test in case I need to know which names were assigned to the pressed keys
-                        File.AppendAllText(@"D:\Test.txt", character.KeyCode.ToString() + "\r\n");
+                        //File.AppendAllText(@"D:\Test.txt", character.KeyCode.ToString() + "\r\n");
 
 
                         ////////////////////// Logik für Filter//////////////////////////////
@@ -62,7 +62,7 @@ namespace AbschlussprojektWPF
                                 CurrentKey = "Insert";
                                 File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
                                 File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
-                                IsFirst = true;
+                               
 
                             }
                             // Alt Taste
@@ -72,25 +72,25 @@ namespace AbschlussprojektWPF
                                 CurrentKey = "LMenu";
                                 File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
                                 File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
-                                IsFirst = true;
+                                
                             }
                             else if (character.KeyCode.ToString() == "LControlKey")
                             {
                                 KeyOne = "Strg + ";
                                 CurrentKey = "LControlKey";
-                                IsFirst = true;
+                                
 
                             }
                             else if (character.KeyCode.ToString() == "RMenu")
                             {
-                                IsFirst = false;
+                                ;
                             }
                             else
                             {
                                 KeyOne = character.KeyCode.ToString();
                                 File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
                                 File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
-                                IsFirst = true;
+                                
                             }
 
                             // EasyTask Job Program Job add to 3rd column when active program switches
@@ -98,18 +98,18 @@ namespace AbschlussprojektWPF
                             if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
                             {
                                 File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + "\r\n");
-                                IsFirst = true;
+                                
                                 UsedProgram = activeWindow.GetTitleOfActiveWindow();
 
                             }
                             else
                             {
                                 File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
-                                IsFirst = true;
+                                
                             }
-                            
+                            IsFirst = true;
                             IsSecond = true;
-                            Tab = 0;
+                            Tab = 1;
                         }
 
                         // Erste Taste + zweite Taste
@@ -168,12 +168,9 @@ namespace AbschlussprojektWPF
 
                             UsedProgram = activeWindow.GetTitleOfActiveWindow();
 
-                            IsSecond = true;
+                            IsSecond = true; // nur für die Tab Taste
                             IsFirst = false;
-
-                            
-                            
-                            Tab = 1;
+                            //Tab = 1;
                             KeyOne = "";
 
                         }
@@ -184,22 +181,25 @@ namespace AbschlussprojektWPF
 
                             File.AppendAllText(@"D:\KeysOnly.txt", character.KeyCode + "\r\n");
                             File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
-
+                            
+ 
 
                             if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
                             {
                                 Tab = 1;
+   
                             }
 
-                            if (Tab > 3)
+                            if (Tab > 2)
                             {
                                 File.AppendAllText(@"D:\ETJob.txt", "Tab x " + Tab + "\r\n");
+                                
                             }
                             else
                             {
-
                                 if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
                                 {
+
                                     File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + " " + "\r\n");
 
                                 }
@@ -207,8 +207,6 @@ namespace AbschlussprojektWPF
                                 {
                                     File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
                                 }
-
-
                             }
                             UsedProgram = activeWindow.GetTitleOfActiveWindow();
 

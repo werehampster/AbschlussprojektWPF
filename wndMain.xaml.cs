@@ -276,7 +276,7 @@ namespace AbschlussprojektWPF
                 MessageBoxResult result = MessageBox.Show("Firefox läuft nicht, soll das Programm geöffnet werden?", "Logger - Firefox öffnen", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    Process.Start(@"C:\Program Files\Mozilla Firefox\firefox.exe");
+                    Process.Start(@"C:\Program Files\Firefox Developer Edition\firefox.exe");
                 }
                 else
                 {
