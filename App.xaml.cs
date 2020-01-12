@@ -51,7 +51,8 @@ namespace AbschlussprojektWPF
 
                         // Erste Taste
                         if ((character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0") && (CurrentKey != "Insert" || character.KeyCode.ToString() != "NumPad0") ||
-                            (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") || character.KeyCode.ToString() == "LControlKey")
+                            (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") || 
+                            (character.KeyCode.ToString() == "LControlKey" && CurrentKey != "LControlKey"))
                         {
                             //NVDA Taste 
                             if (character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0")
@@ -95,7 +96,14 @@ namespace AbschlussprojektWPF
                         }
 
                         // Erste Taste + zweite Taste
-                        if ((character.KeyCode.ToString() == "Tab" || character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal" || character.KeyCode.ToString() == "LMenu" || character.KeyCode.ToString() == "N") && IsFirst == true)
+                        if ((character.KeyCode.ToString() == "Tab" || 
+                            character.KeyCode.ToString() == "Delete" || 
+                            character.KeyCode.ToString() == "Decimal" || 
+                            character.KeyCode.ToString() == "LMenu" || 
+                            character.KeyCode.ToString() == "N" || 
+                            character.KeyCode.ToString() == "S" ||
+                            character.KeyCode.ToString() == "RMenu") 
+                            && IsFirst == true)
                         {
                             // Entfernen Taste
                             if (character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal")
@@ -109,6 +117,10 @@ namespace AbschlussprojektWPF
                             {
                                 KeyTwo = "Alt";
                                 CurrentKey = "LMenu";
+                            }
+                            else if (character.KeyCode.ToString() == "RMenu" && KeyOne == "LControlKey")
+                            {
+
                             }
                             else
                             {
