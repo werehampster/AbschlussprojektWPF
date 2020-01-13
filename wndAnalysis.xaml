@@ -4,15 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AbschlussprojektWPF"
-        mc:Ignorable="d" Height="450" Width="423.598" Title="EasyTask - Log Auswertung">
+        mc:Ignorable="d" Height="873.126" Width="889.933" Title="EasyTask - Log Auswertung">
     <Grid Margin="0,0,3.6,0">
-        <DataGrid x:Name="dgAnalysis" AutoGenerateColumns="False" Margin="10,0,9.8,58" >
-            <!--HorizontalAlignment="Left" Height="322" Margin="68,26,0,0" VerticalAlignment="Top" Width="661" ColumnWidth="220" AutoGenerateColumns="True" ItemsSource="{Binding}" AreRowDetailsFrozen="True"-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="21*"/>
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="632*"/>
+            <ColumnDefinition Width="150*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="dgAnalysis" AutoGenerateColumns="False" Margin="10,0,42,125" Grid.ColumnSpan="4" >
+            <!--HorizontalAlignment="Left" Height="322" Margin="68,26,0,0" VerticalAlignment="Top" Width="900" ColumnWidth="220" AutoGenerateColumns="True" ItemsSource="{Binding}" AreRowDetailsFrozen="True"-->
 
         </DataGrid>
-                <Button x:Name="btnQuit" Content="Beenden" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Width="75" Click="btnQuit_Click" Height="26" RenderTransformOrigin="-0.15,0.542"/>
-        <Button x:Name="btnEasyTask" Content="EasyTask Starten" HorizontalAlignment="Left" Margin="121,375,0,0" VerticalAlignment="Top" Width="106" Click="btnEasyTask_Click" Height="26"/>
-        <Button x:Name="btnClose" Content="Fenster Schließen" HorizontalAlignment="Left" Margin="255,375,0,0" VerticalAlignment="Top" Width="104" Click="btnClose_Click" Height="26"/>
+        <Button x:Name="btnQuit" Content="Beenden" HorizontalAlignment="Left" Margin="10,747,0,0" VerticalAlignment="Top" Width="240" Click="btnQuit_Click" Height="69" RenderTransformOrigin="-0.15,0.542" FontWeight="Bold" FontSize="20" Grid.ColumnSpan="3"/>
+        <Button x:Name="btnEasyTask" Content="EasyTask Starten" HorizontalAlignment="Left" Margin="309,747,0,0" VerticalAlignment="Top" Width="211" Click="btnEasyTask_Click" Height="69" FontWeight="Bold" FontSize="20" Grid.Column="2"/>
+        <Button x:Name="btnClose" Content="Fenster Schließen" HorizontalAlignment="Left" Margin="542,747,0,0" VerticalAlignment="Top" Width="198" Click="btnClose_Click" Height="69" FontSize="20" FontWeight="Bold" Grid.Column="2" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>

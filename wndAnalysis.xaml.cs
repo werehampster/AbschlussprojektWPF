@@ -50,16 +50,16 @@ namespace AbschlussprojektWPF
             DataGridTextColumn shortcut = new DataGridTextColumn();
             shortcut.Header = "Tastenkürzel";
             shortcut.Binding = new System.Windows.Data.Binding("shortcut");
-            shortcut.Width = 110;
+            shortcut.Width = 210;
             dgAnalysis.Columns.Add(shortcut);
             DataGridTextColumn program = new DataGridTextColumn();
             program.Header = "Aktives Programm";
-            program.Width = 110;
+            program.Width = 310;
             program.Binding = new System.Windows.Data.Binding("program");
             dgAnalysis.Columns.Add(program);
             DataGridTextColumn easyTaskJob = new DataGridTextColumn();
             easyTaskJob.Header = "Möglicher EasyTask Job";
-            easyTaskJob.Width = 110;
+            easyTaskJob.Width = 310;
             easyTaskJob.Binding = new System.Windows.Data.Binding("easyTaskJob");
             dgAnalysis.Columns.Add(easyTaskJob);
 
@@ -76,11 +76,13 @@ namespace AbschlussprojektWPF
                         try
                         {
                             dgAnalysis.Items.Add(new Line() { shortcut = sc, program = prog[i], easyTaskJob = etj[i] });
+                            dgAnalysis.FontSize = 20;
                             i++;
                         }
                         catch
                         {
                             dgAnalysis.Items.Add(new Line() { shortcut = sc, program = "" });
+                            dgAnalysis.FontSize = 20;
                             i++;
                         }
                     }

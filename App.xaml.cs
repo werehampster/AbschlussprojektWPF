@@ -41,21 +41,20 @@ namespace AbschlussprojektWPF
                     if (IsLoggingStarted)
                     {
 
-                        // Test in case I need to know which names were assigned to the pressed keys
+                        /////// Test in case I need to know which names were assigned to the pressed keys ///////
                         //File.AppendAllText(@"D:\Test.txt", character.KeyCode.ToString() + "\r\n");
-
 
                         ////////////////////// Logik für Filter//////////////////////////////
 
                         // NVDA
 
-                        // Erste Taste
-                        if ((character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0") && (CurrentKey != "Insert" || character.KeyCode.ToString() != "NumPad0") ||
+                        // First Key
+                        if ((character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0")&&(CurrentKey != "Insert" || character.KeyCode.ToString() != "NumPad0") ||
                             (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") ||
                             (character.KeyCode.ToString() == "LControlKey" && CurrentKey != "LControlKey")||
                             character.KeyCode.ToString() == "RMenu")
                         {
-                            //NVDA Taste 
+                            //NVDA Key 
                             if (character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0")
                             {
                                 KeyOne = "NVDA + ";
@@ -65,7 +64,7 @@ namespace AbschlussprojektWPF
                                
 
                             }
-                            // Alt Taste
+                            // Alt Key
                             else if (character.KeyCode.ToString() == "LMenu")
                             {
                                 KeyOne = "Alt + ";
@@ -112,18 +111,18 @@ namespace AbschlussprojektWPF
                             Tab = 1;
                         }
 
-                        // Erste Taste + zweite Taste
+                        // First Key + second key
                         if ((character.KeyCode.ToString() == "Tab" ||
                             character.KeyCode.ToString() == "Delete" ||
-                            character.KeyCode.ToString() == "Decimal" || //Numpad Komma
+                            character.KeyCode.ToString() == "Decimal" || //Numpad comma
                             (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") || //Alt
                             character.KeyCode.ToString() == "N" ||
                             character.KeyCode.ToString() == "S" ||
-                            character.KeyCode.ToString() == "RMenu") //AltGR
+                            character.KeyCode.ToString() == "RMenu") //AltGR needed to deactivate
                             && IsFirst == true)
                         {
                             
-                            // Entfernen Taste
+                            // Delete key
                             if (character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal")
                             {
                                 KeyTwo = "Num Entf";
@@ -131,7 +130,7 @@ namespace AbschlussprojektWPF
                                 CurrentKey = "Delete";
                                 File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
                             }
-                            // Alt Taste
+                            // Alt key
                             else if (character.KeyCode.ToString() == "LMenu")
                             {
                                 KeyTwo = "Alt";
@@ -142,17 +141,19 @@ namespace AbschlussprojektWPF
                             {
                                 ;
                             }
-                            // Alt Taste
-                            else if(character.KeyCode.ToString() == "LMenu")
-                            {
-                                KeyTwo = "Alt";
-                                CurrentKey = "LMenu";
-                                File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
-                            }
+                            //// Alt key
+                            //else if(character.KeyCode.ToString() == "LMenu")
+                            //{
+                            //    KeyTwo = "Alt";
+                            //    CurrentKey = "LMenu";
+                            //    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                            //}
+                            // Alt GR key needs to be disabled because it logs as RMenu plus LControlKey
                             else if (character.KeyCode.ToString() == "RMenu" && KeyOne == "LControlKey")
                             {
                                 KeyTwo = "RMenu";
                             }
+                            // Control key
                             else if (KeyOne == "Strg + " && KeyTwo != "RMenu")
                             {
                                 File.AppendAllText(@"D:\KeysOnly.txt", KeyOne + " " + character.KeyCode.ToString() + "\r\n");
@@ -168,7 +169,7 @@ namespace AbschlussprojektWPF
 
                             UsedProgram = activeWindow.GetTitleOfActiveWindow();
 
-                            IsSecond = true; // nur für die Tab Taste
+                            IsSecond = true; // needed only for Tab
                             IsFirst = false;
                             //Tab = 1;
                             KeyOne = "";

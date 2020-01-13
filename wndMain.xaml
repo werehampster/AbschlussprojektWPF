@@ -7,9 +7,13 @@
         mc:Ignorable="d"
         Title="EasyTask - Log" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="655*"/>
+            <ColumnDefinition Width="137*"/>
+        </Grid.ColumnDefinitions>
         <Button x:Name="btnQuit" Content="Beenden" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.396,18.362" Margin="41,361,0,0" Click="BtnQuit_Click" Height="34"/>
         <Button x:Name="btnAnalysis" Content="Auswertung" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="498,361,0,0" Height="34" Click="BtnAnalysis_Click"/>
-        <Button x:Name="btnLog" Content="Start/Stop Log" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="645,361,0,0" Height="34" Click="BtnLog_Click"/>
+        <Button x:Name="btnLog" Content="Start/Stop Log" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="645,361,0,0" Height="34" Click="BtnLog_Click" Grid.ColumnSpan="2"/>
         <GroupBox x:Name="gbRelevantProgs" Header="Relevante Programme" HorizontalAlignment="Left" Height="174" VerticalAlignment="Top" Width="150" RenderTransformOrigin="1.594,2.09" Margin="41,42,0,0">
             <Grid Margin="0,36,11,16">
                 <Grid>
