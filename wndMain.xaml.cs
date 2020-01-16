@@ -51,10 +51,12 @@ namespace AbschlussprojektWPF
         bool procNvda;
         bool procZoomtext;
         // bool procSupernova;
+
+        
         public wndMain()
         {
             InitializeComponent();
-
+            
         }
 
         void wndMain_Closing(object sender, ConsoleCancelEventArgs e)
