@@ -49,18 +49,21 @@ namespace AbschlussprojektWPF
             {
                 Process.Start(@"C:\Program Files\Freedom Scientific\JAWS\2019\jfw.exe");
                 wndMain.jaws = true;
+                App.IsLoggingStarted = true;
             }
 
             if(cbZoomText.IsChecked == true)
             {
                 Process.Start(@"C:\Program Files (x86)\Freedom Scientific\ZoomText\2019\Zt.exe");
                 wndMain.zoomtext = true;
+                App.IsLoggingStarted = true;
             }
 
             if(cbNVDA.IsChecked == true)
             {
                 Process.Start(@"C:\Program Files\NVDA\mynvda.exe");
                 wndMain.nvda = true;
+                App.IsLoggingStarted = true;
             }
 
             wndMessageBoxStartLog wndMessageBoxStartLog = new wndMessageBoxStartLog();

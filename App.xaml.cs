@@ -42,140 +42,402 @@ namespace AbschlussprojektWPF
                     {
 
                         /////// Test in case I need to know which names were assigned to the pressed keys ///////
-                        //File.AppendAllText(@"D:\Test.txt", character.KeyCode.ToString() + "\r\n");
+                        File.AppendAllText(@"D:\Test.txt", character.KeyCode.ToString() + "\r\n");
 
                         ////////////////////// Logik für Filter//////////////////////////////
 
-                        // NVDA
+                        /////// NVDA ///////
 
-                        // First Key
-                        if ((character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0")&&(CurrentKey != "Insert" || character.KeyCode.ToString() != "NumPad0") ||
-                            (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") ||
-                            (character.KeyCode.ToString() == "LControlKey" && CurrentKey != "LControlKey")||
-                            character.KeyCode.ToString() == "RMenu")
+
+                        #region NVDA
+                        if (wndMain.nvda == true)
                         {
-                            //NVDA Key 
-                            if (character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0")
+                            // First Key
+                            if ((character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0") && (CurrentKey != "Insert" || character.KeyCode.ToString() != "NumPad0") ||
+                        (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") ||
+                        (character.KeyCode.ToString() == "LControlKey" && CurrentKey != "LControlKey") ||
+                        character.KeyCode.ToString() == "RMenu")
                             {
-                                KeyOne = "NVDA + ";
-                                CurrentKey = "Insert";
-                                File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
-                                File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
-                               
+                                //NVDA Key 
+                                if (character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0")
+                                {
+                                    KeyOne = "NVDA + ";
+                                    CurrentKey = "Insert";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
 
-                            }
-                            // Alt Key
-                            else if (character.KeyCode.ToString() == "LMenu")
-                            {
-                                KeyOne = "Alt + ";
-                                CurrentKey = "LMenu";
-                                File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
-                                File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
-                                
-                            }
-                            else if (character.KeyCode.ToString() == "LControlKey")
-                            {
-                                KeyOne = "Strg + ";
-                                CurrentKey = "LControlKey";
-                                
 
-                            }
-                            else if (character.KeyCode.ToString() == "RMenu")
-                            {
-                                ;
-                            }
-                            else
-                            {
-                                KeyOne = character.KeyCode.ToString();
-                                File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
-                                File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
-                                
+                                }
+                                // Alt Key
+                                else if (character.KeyCode.ToString() == "LMenu")
+                                {
+                                    KeyOne = "Alt + ";
+                                    CurrentKey = "LMenu";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+
+                                }
+                                else if (character.KeyCode.ToString() == "LControlKey")
+                                {
+                                    KeyOne = "Strg + ";
+                                    CurrentKey = "LControlKey";
+
+
+                                }
+                                else if (character.KeyCode.ToString() == "RMenu")
+                                {
+                                    ;
+                                }
+                                else
+                                {
+                                    KeyOne = character.KeyCode.ToString();
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+
+                                }
+
+                                // EasyTask Job Program Job add to 3rd column when active program switches
+
+                                if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
+                                {
+                                    File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + "\r\n");
+
+                                    UsedProgram = activeWindow.GetTitleOfActiveWindow();
+
+                                }
+                                else
+                                {
+                                    File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
+
+                                }
+                                IsFirst = true;
+                                IsSecond = true;
+                                Tab = 1;
                             }
 
-                            // EasyTask Job Program Job add to 3rd column when active program switches
-
-                            if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
+                            // First Key + second key
+                            if ((character.KeyCode.ToString() == "Tab" ||
+                                character.KeyCode.ToString() == "Delete" ||
+                                character.KeyCode.ToString() == "Decimal" || //Numpad comma
+                                (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") || //Alt
+                                character.KeyCode.ToString() == "N" ||
+                                character.KeyCode.ToString() == "S" ||
+                                character.KeyCode.ToString() == "RMenu") //AltGR needed to deactivate
+                                && IsFirst == true)
                             {
-                                File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + "\r\n");
-                                
+
+                                // Delete key
+                                if (character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal")
+                                {
+                                    KeyTwo = "Num Entf";
+
+                                    CurrentKey = "Delete";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                }
+                                // Alt key
+                                else if (character.KeyCode.ToString() == "LMenu")
+                                {
+                                    KeyTwo = "Alt";
+                                    CurrentKey = "LMenu";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                }
+                                else if (character.KeyCode.ToString() == "RMenu")
+                                {
+                                    ;
+                                }
+                                // Alt GR key needs to be disabled because it logs as RMenu plus LControlKey
+                                else if (character.KeyCode.ToString() == "RMenu" && KeyOne == "LControlKey")
+                                {
+                                    KeyTwo = "RMenu";
+                                }
+                                // Control key
+                                else if (KeyOne == "Strg + " && KeyTwo != "RMenu")
+                                {
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne + " " + character.KeyCode.ToString() + "\r\n");
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+                                    CurrentKey = character.KeyCode.ToString();
+                                }
+                                else
+                                {
+                                    KeyTwo = character.KeyCode.ToString();
+                                    CurrentKey = KeyTwo;
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                }
+
                                 UsedProgram = activeWindow.GetTitleOfActiveWindow();
 
-                            }
-                            else
-                            {
-                                File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
-                                
-                            }
-                            IsFirst = true;
-                            IsSecond = true;
-                            Tab = 1;
-                        }
+                                IsSecond = true; // needed only for Tab
+                                IsFirst = false;
+                                //Tab = 1;
+                                KeyOne = "";
 
-                        // First Key + second key
-                        if ((character.KeyCode.ToString() == "Tab" ||
-                            character.KeyCode.ToString() == "Delete" ||
-                            character.KeyCode.ToString() == "Decimal" || //Numpad comma
-                            (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") || //Alt
-                            character.KeyCode.ToString() == "N" ||
-                            character.KeyCode.ToString() == "S" ||
-                            character.KeyCode.ToString() == "RMenu") //AltGR needed to deactivate
-                            && IsFirst == true)
+                            }
+                        } 
+                        #endregion
+
+
+                        ////// JAWS ///////
+                        #region JAWS
+                        if (wndMain.jaws == true)
                         {
-                            
-                            // Delete key
-                            if (character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal")
+                            // First Key
+                            if ((character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0") && (CurrentKey != "Insert" || character.KeyCode.ToString() != "NumPad0") ||
+                        (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") ||
+                        (character.KeyCode.ToString() == "LControlKey" && CurrentKey != "LControlKey") ||
+                        character.KeyCode.ToString() == "RMenu")
                             {
-                                KeyTwo = "Num Entf";
+                                //JAWS Key 
+                                if (character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0")
+                                {
+                                    KeyOne = "JAWS + ";
+                                    CurrentKey = "Insert";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
 
-                                CurrentKey = "Delete";
-                                File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
-                            }
-                            // Alt key
-                            else if (character.KeyCode.ToString() == "LMenu")
-                            {
-                                KeyTwo = "Alt";
-                                CurrentKey = "LMenu";
-                                File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
-                            }
-                            else if (character.KeyCode.ToString() == "RMenu")
-                            {
-                                ;
-                            }
-                            //// Alt key
-                            //else if(character.KeyCode.ToString() == "LMenu")
-                            //{
-                            //    KeyTwo = "Alt";
-                            //    CurrentKey = "LMenu";
-                            //    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
-                            //}
-                            // Alt GR key needs to be disabled because it logs as RMenu plus LControlKey
-                            else if (character.KeyCode.ToString() == "RMenu" && KeyOne == "LControlKey")
-                            {
-                                KeyTwo = "RMenu";
-                            }
-                            // Control key
-                            else if (KeyOne == "Strg + " && KeyTwo != "RMenu")
-                            {
-                                File.AppendAllText(@"D:\KeysOnly.txt", KeyOne + " " + character.KeyCode.ToString() + "\r\n");
-                                File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
-                                CurrentKey = character.KeyCode.ToString();
-                            }
-                            else
-                            {
-                                KeyTwo = character.KeyCode.ToString();
-                                CurrentKey = KeyTwo;
-                                File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+
+                                }
+                                // Alt Key
+                                else if (character.KeyCode.ToString() == "LMenu")
+                                {
+                                    KeyOne = "Alt + ";
+                                    CurrentKey = "LMenu";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+
+                                }
+                                else if (character.KeyCode.ToString() == "LControlKey")
+                                {
+                                    KeyOne = "Strg + ";
+                                    CurrentKey = "LControlKey";
+
+
+                                }
+                                else if (character.KeyCode.ToString() == "RMenu")
+                                {
+                                    ;
+                                }
+                                else
+                                {
+                                    KeyOne = character.KeyCode.ToString();
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+
+                                }
+
+                                // EasyTask Job Program Job add to 3rd column when active program switches
+
+                                if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
+                                {
+                                    File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + "\r\n");
+
+                                    UsedProgram = activeWindow.GetTitleOfActiveWindow();
+
+                                }
+                                else
+                                {
+                                    File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
+
+                                }
+                                IsFirst = true;
+                                IsSecond = true;
+                                Tab = 1;
                             }
 
-                            UsedProgram = activeWindow.GetTitleOfActiveWindow();
+                            // First Key + second key
+                            if ((character.KeyCode.ToString() == "Tab" ||
+                                character.KeyCode.ToString() == "Delete" ||
+                                character.KeyCode.ToString() == "Decimal" || //Numpad comma
+                                (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") || //Alt
+                                character.KeyCode.ToString() == "N" ||
+                                character.KeyCode.ToString() == "S" ||
+                                character.KeyCode.ToString() == "RMenu") //AltGR needed to deactivate
+                                && IsFirst == true)
+                            {
 
-                            IsSecond = true; // needed only for Tab
-                            IsFirst = false;
-                            //Tab = 1;
-                            KeyOne = "";
+                                // Delete key
+                                if (character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal")
+                                {
+                                    KeyTwo = "Num Entf";
 
-                        }
-                        
+                                    CurrentKey = "Delete";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                }
+                                // Alt key
+                                else if (character.KeyCode.ToString() == "LMenu")
+                                {
+                                    KeyTwo = "Alt";
+                                    CurrentKey = "LMenu";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                }
+                                else if (character.KeyCode.ToString() == "RMenu")
+                                {
+                                    ;
+                                }
+                                // Alt GR key needs to be disabled because it logs as RMenu plus LControlKey
+                                else if (character.KeyCode.ToString() == "RMenu" && KeyOne == "LControlKey")
+                                {
+                                    KeyTwo = "RMenu";
+                                }
+                                // Control key
+                                else if (KeyOne == "Strg + " && KeyTwo != "RMenu")
+                                {
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne + " " + character.KeyCode.ToString() + "\r\n");
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+                                    CurrentKey = character.KeyCode.ToString();
+                                }
+                                else
+                                {
+                                    KeyTwo = character.KeyCode.ToString();
+                                    CurrentKey = KeyTwo;
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                }
+
+                                UsedProgram = activeWindow.GetTitleOfActiveWindow();
+
+                                IsSecond = true; // needed only for Tab
+                                IsFirst = false;
+                                //Tab = 1;
+                                KeyOne = "";
+
+                            }
+                        } 
+                        #endregion
+
+                        ////// ZoomText /////
+
+                        #region ZOOMTEXT
+                        if (wndMain.zoomtext == true)
+                        {
+                            // First Key
+                            if ((character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0") && (CurrentKey != "Insert" || character.KeyCode.ToString() != "NumPad0") ||
+                        (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") ||
+                        (character.KeyCode.ToString() == "LControlKey" && CurrentKey != "LControlKey") ||
+                        character.KeyCode.ToString() == "RMenu")
+                            {
+                                //NVDA Key 
+                                if (character.KeyCode.ToString() == "Insert" || character.KeyCode.ToString() == "NumPad0")
+                                {
+                                    KeyOne = "NVDA + ";
+                                    CurrentKey = "Insert";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+
+
+                                }
+                                // Alt Key
+                                else if (character.KeyCode.ToString() == "LMenu")
+                                {
+                                    KeyOne = "Alt + ";
+                                    CurrentKey = "LMenu";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+
+                                }
+                                else if (character.KeyCode.ToString() == "LControlKey")
+                                {
+                                    KeyOne = "Strg + ";
+                                    CurrentKey = "LControlKey";
+
+
+                                }
+                                else if (character.KeyCode.ToString() == "RMenu")
+                                {
+                                    ;
+                                }
+                                else
+                                {
+                                    KeyOne = character.KeyCode.ToString();
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne);
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+
+                                }
+
+                                // EasyTask Job Program Job add to 3rd column when active program switches
+
+                                if (UsedProgram != activeWindow.GetTitleOfActiveWindow())
+                                {
+                                    File.AppendAllText(@"D:\ETJob.txt", "Programm Job erstellen" + "\r\n");
+
+                                    UsedProgram = activeWindow.GetTitleOfActiveWindow();
+
+                                }
+                                else
+                                {
+                                    File.AppendAllText(@"D:\ETJob.txt", " " + "\r\n");
+
+                                }
+                                IsFirst = true;
+                                IsSecond = true;
+                                Tab = 1;
+                            }
+
+                            // First Key + second key
+                            if ((character.KeyCode.ToString() == "Tab" ||
+                                character.KeyCode.ToString() == "Delete" ||
+                                character.KeyCode.ToString() == "Decimal" || //Numpad comma
+                                (character.KeyCode.ToString() == "LMenu" && CurrentKey != "LMenu") || //Alt
+                                character.KeyCode.ToString() == "N" ||
+                                character.KeyCode.ToString() == "S" ||
+                                character.KeyCode.ToString() == "RMenu") //AltGR needed to deactivate
+                                && IsFirst == true)
+                            {
+
+                                // Delete key
+                                if (character.KeyCode.ToString() == "Delete" || character.KeyCode.ToString() == "Decimal")
+                                {
+                                    KeyTwo = "Num Entf";
+
+                                    CurrentKey = "Delete";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                }
+                                // Alt key
+                                else if (character.KeyCode.ToString() == "LMenu")
+                                {
+                                    KeyTwo = "Alt";
+                                    CurrentKey = "LMenu";
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                }
+                                else if (character.KeyCode.ToString() == "RMenu")
+                                {
+                                    ;
+                                }
+                                //// Alt key
+                                //else if(character.KeyCode.ToString() == "LMenu")
+                                //{
+                                //    KeyTwo = "Alt";
+                                //    CurrentKey = "LMenu";
+                                //    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                //}
+                                // Alt GR key needs to be disabled because it logs as RMenu plus LControlKey
+                                else if (character.KeyCode.ToString() == "RMenu" && KeyOne == "LControlKey")
+                                {
+                                    KeyTwo = "RMenu";
+                                }
+                                // Control key
+                                else if (KeyOne == "Strg + " && KeyTwo != "RMenu")
+                                {
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyOne + " " + character.KeyCode.ToString() + "\r\n");
+                                    File.AppendAllText(@"D:\ActiveProgram.txt", activeWindow.GetTitleOfActiveWindow() + "\r\n");
+                                    CurrentKey = character.KeyCode.ToString();
+                                }
+                                else
+                                {
+                                    KeyTwo = character.KeyCode.ToString();
+                                    CurrentKey = KeyTwo;
+                                    File.AppendAllText(@"D:\KeysOnly.txt", KeyTwo + "\r\n");
+                                }
+
+                                UsedProgram = activeWindow.GetTitleOfActiveWindow();
+
+                                IsSecond = true; // needed only for Tab
+                                IsFirst = false;
+                                //Tab = 1;
+                                KeyOne = "";
+
+                            }
+                        } 
+                        #endregion
+
                         // EasyTask Job Tab x
                         if (character.KeyCode.ToString() == "Tab" && IsSecond == false)
                         {

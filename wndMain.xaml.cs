@@ -47,9 +47,9 @@ namespace AbschlussprojektWPF
         bool procWord;
         bool procExcel;
         bool procOutlook;
-        bool procJaws;
-        bool procNvda;
-        bool procZoomtext;
+        public static bool procJaws;
+        public static bool procNvda;
+        public static bool procZoomtext;
         // bool procSupernova;
 
         
@@ -153,6 +153,7 @@ namespace AbschlussprojektWPF
                     wndMessageBoxStartLog wndMessageBoxStartedLog = new wndMessageBoxStartLog();
                     wndMessageBoxStartedLog.Show();
                     App.IsLoggingStarted = true;
+                    
                     
                 }
                 
